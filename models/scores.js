@@ -20,8 +20,6 @@ class Scores {
             return(err.message);
         }
     }
-
-
 }
 
 module.exports = Scores;

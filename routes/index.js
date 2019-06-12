@@ -4,7 +4,7 @@ const express = require('express'),
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('template', { 
-    locals:{
+    locals: {
       title: 'Home Page'
     },
     partials: {
