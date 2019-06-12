@@ -4,8 +4,9 @@ const express = require('express'),
     logger = require('morgan'),
     es6Renderer = require('express-es6-template-engine'),
     indexRouter = require('./routes/index'),
-    usersRouter = require('./routes/users');
-
+    usersRouter = require('./routes/users'),
+    scoresRouter = require('./routes/scores');
+    
 const app = express();
 
 app.set('views','./views');
@@ -20,5 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/scores', scoresRouter);
 
 module.exports = app;
