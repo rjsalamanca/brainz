@@ -1,7 +1,11 @@
-let gameRunning = false;
-const gameContainer = document.getElementById('game');
-const wait1s = ms => new Promise((r, j) => setTimeout((r), 1000))
-let totalScore = 0;
+const gameContainer = document.getElementById('game'),
+    wait1s = ms => new Promise((r, j) => setTimeout((r), 1000)),
+    accuracy = document.getElementById('accuracy');
+
+let gameRunning = false,
+    totalScore = 0,
+    clicks = 0,
+    targetClicks = 0;
 
 class Target {
     constructor(size, difficulty) {
@@ -11,25 +15,9 @@ class Target {
 
     async populate() {
 
-        const body = document.body;
-        const accuracy = document.body;
-        let clicks = 0;
-        let targetClicks = 0;
-
-        body.addEventListener('click', function () {
-            clicks++;
-
-        });
-
         gameContainer.innerHTML += `<div id='target'></div>`;
         let targetNode = document.getElementById('target');
-        // setTimeout(()=>{                
-        //     targetNode.style.height = '200px'
-        //     targetNode.style.top = `${this.size*2}px`;
-        // },200)
-
-        var startTime = new Date();
-        let targ = this;
+        let startTime = new Date();
         let game = {
             height: gameContainer.offsetHeight,
             width: gameContainer.offsetWidth
@@ -37,8 +25,8 @@ class Target {
         let randomHeight = Math.floor(Math.random() * 100) + 1
         let randomWidth = Math.floor(Math.random() * 100) + 1
 
-        target.style.right = `calc(${randomWidth}% - ${this.size}px)`;
-        target.style.top = `calc(${randomHeight}% - ${this.size}px)`;
+        target.style.right = ${randomWidth};
+        target.style.top = ${randomHeight};
 
         let timer = setTimeout((res) => {
             const target = document.getElementById('target');
@@ -87,7 +75,13 @@ async function gameStart() {
                 console.log(seconds)
             }
         }, 1000)
-
+        const body = document.body;
+        body.addEventListener('click', function () {
+            console.log(`clicks: ${clicks} - target: ${targetClicks}`)
+            clicks++;
+            let acc = ((targetClicks/clicks)*100).toFixed(2);;
+            accuracy.innerHTML = `${acc}%`;
+        });
         createTarget();
     }
 }
