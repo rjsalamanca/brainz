@@ -19,11 +19,27 @@ router.use(bodyParser.urlencoded({extended: false}));
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  // res.render('partial-users');
+  res.render('template', { 
+    locals:{
+      title: 'Users Page'
+    },
+    partials: {
+      partial:'partial-users'
+    }
+  });
 });
 
 router.get('/add-user', (req,res) => {
-  res.render('partial-add-user');
+  // res.render('partial-add-user');
+  res.render('template', { 
+    locals:{
+      title: 'add-user-page'
+    },
+    partials: {
+      partial:'partial-add-user'
+    }
+  });
 
 });
 
@@ -39,7 +55,7 @@ router.post('/add-user', (req,res) =>{
   console.log(name);
   console.log(pass);
 
-  res.status(200).send();
+  res.redirect('/users');
 });
 
 
