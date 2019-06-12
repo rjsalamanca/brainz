@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+
+#game {
+  width:100%;
+  height:200px;
+  border:1px solid red;
+  position:relative;
+}
+
+#target{
+  position:absolute;
+  border:1px solid red;
+  top: calc(0% - 100px);
+  width:50px;
+  height:100px;
+  transition:height 0.2s;
+}
+
+#target:hover{
+  background-color:red;
+}

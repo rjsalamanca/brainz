@@ -5,7 +5,7 @@ const express = require('express'),
 router.get('/', function(req, res, next) {
   res.render('template', { 
     locals:{
-      title: 'Express'
+      title: 'Home Page'
     },
     partials: {
       partial:'partial-index'
