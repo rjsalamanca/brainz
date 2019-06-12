@@ -7,89 +7,34 @@ let gameRunning = false,
     clicks = 0,
     targetClicks = 0;
 
-class Target {
-    constructor(size, difficulty) {
-        this.size = size;
-        this.difficulty = difficulty;
-    }
-
-    async populate() {
-
-        gameContainer.innerHTML += `<div id='target'></div>`;
-        let targetNode = document.getElementById('target');
-        let startTime = new Date();
-        let game = {
-            height: gameContainer.offsetHeight,
-            width: gameContainer.offsetWidth
-        }
-        let randomHeight = Math.floor(Math.random() * 100) + 1
-        let randomWidth = Math.floor(Math.random() * 100) + 1
-
-        target.style.right = ${randomWidth};
-        target.style.top = ${randomHeight};
-
-        let timer = setTimeout((res) => {
-            const target = document.getElementById('target');
-            if (target) {
-                console.log('Moving')
-                gameContainer.innerHTML = '';
-
-                clearTimeout(timer);
-                createTarget();
-            }
-        }, 2000);
-
-        target.addEventListener('click', function (e) {
-
-            const endTime = new Date();
-            var timeDiff = endTime - startTime;
-            var score = 2000 - timeDiff;
-            console.log('TIME TOOK: ', timeDiff)
-
-            totalScore += score;
-            document.getElementById('score').innerHTML = totalScore;
-
-            gameContainer.innerHTML = '';
-            targetNode.style.height = '0px'
-
-            targetClicks++;
-            clearTimeout(timer)
-            createTarget();
-        })
-    }
-}
-
 async function gameStart() {
+    const timerContainer = document.getElementById('timeLeft'),
+        body = document.body;
+
     if (!gameRunning) {
         gameRunning = true;
         await startTime();
         let seconds = 0;
-        let minute = setInterval(() => {
+
+        body.addEventListener('click', function () {
+            clicks++;
+            const calculatedAcc = ((targetClicks/clicks)*100).toFixed(2);
+            accuracy.innerHTML = `${calculatedAcc}%`;
+        });
+
+        let gameTimer = setInterval(() => {
             seconds++
             if (seconds == 60) {
                 gameRunning = false;
-                clearInterval(minute);
-                console.log('DONE PLAYING: ', seconds);
-                gameContainer.remove();
+                clearInterval(gameTimer);
+                //gameContainer.remove();
             } else {
-                console.log(seconds)
+                timerContainer.innerHTML = 60 - seconds;
             }
         }, 1000)
-        const body = document.body;
-        body.addEventListener('click', function () {
-            console.log(`clicks: ${clicks} - target: ${targetClicks}`)
-            clicks++;
-            let acc = ((targetClicks/clicks)*100).toFixed(2);;
-            accuracy.innerHTML = `${acc}%`;
-        });
+
         createTarget();
     }
-}
-
-function createTarget() {
-    let circ = null;
-    circ = new Target(50, 'easy');
-    circ.populate();
 }
 
 async function startTime() {
@@ -105,4 +50,61 @@ async function startTime() {
     }
 
     console.log('GOGOGO')
+}
+
+function createTarget() {
+    let circ = null;
+    circ = new Target(50, 'easy');
+    circ.populate();
+}
+
+class Target {
+    constructor(size, difficulty) {
+        this.size = size;
+        this.difficulty = difficulty;
+    }
+
+    async populate() {
+        gameContainer.innerHTML += `<div id='target'></div>`;
+
+        const targetNode = document.getElementById('target'),
+            startTime = new Date(),
+            randomHeight = Math.floor(Math.random() * 100) + 1,
+            randomWidth = Math.floor(Math.random() * 100) + 1;
+
+        target.style.right = `${randomWidth}%`;
+        target.style.top = `${randomHeight}%`;
+
+        // Moves target when after specific amount of seconds
+        let moveTimer = setTimeout((res) => {
+            if (target) {
+                console.log('Moving Target')               
+                gameContainer.innerHTML = '';
+
+                clearTimeout(moveTimer);
+                createTarget();
+            }
+        }, 2000);
+
+        target.addEventListener('click', function (e) {
+
+            const endTime = new Date();
+            let timeDiff = endTime - startTime,
+                score = 2000 - timeDiff;
+
+            console.log(`TIME TOOK: ${timeDiff} SCORE: ${score}`)
+
+            totalScore += score;
+            document.getElementById('score').innerHTML = totalScore;
+
+            //CLEAR THE GAME AREA   
+            gameContainer.innerHTML = '';
+            targetNode.style.height = '0px'
+            targetClicks++;
+
+            //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
+            clearTimeout(moveTimer);
+            createTarget();
+        });
+    }
 }
