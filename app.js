@@ -5,6 +5,7 @@ const express = require('express'),
     es6Renderer = require('express-es6-template-engine'),
     indexRouter = require('./routes/index'),
     usersRouter = require('./routes/users'),
+    gamesRouter = require('./routes/games'),
     scoresRouter = require('./routes/scores');
     
 const app = express();
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/games',gamesRouter);
 app.use('/scores', scoresRouter);
 
 module.exports = app;

@@ -3,12 +3,12 @@ const express = require('express'),
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('template', { 
-        locals: {
-            title: 'Express'
-        },
-        partials: {
-            partial: 'partial-index'
+  res.render('template', { 
+    locals:{
+      title: 'Home Page'
+    },
+    partials: {
+      partial:'partial-index'
     }
   });
 });

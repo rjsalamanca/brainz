@@ -1,0 +1,89 @@
+<section class="section">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th colspan="4">Easy Regular</th>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Rank</th>
+                <th scope="row">Name</th>
+                <th scope="row">Points</th>
+                <th scope="row">Accuracy</th>
+            </tr>
+        </thead>
+        ${easy.map((easyscore,ind) => 
+            `<tr>
+                <td>${ind+1}</td>
+                <td>${easyscore.first_name}</td>
+                <td>${easyscore.points}</td>
+                <td>${easyscore.accuracy}</td>
+            </tr>`
+        ).join('')}
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th colspan="4">Medium Regular</th>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Rank</th>
+                <th scope="row">Name</th>
+                <th scope="row">Points</th>
+                <th scope="row">Accuracy</th>
+            </tr>
+        </thead>
+        ${med.map((medscore,ind) => 
+            `<tr>
+                <td>${ind+1}</td>
+                <td>${medscore.first_name}</td>
+                <td>${medscore.points}</td>
+                <td>${medscore.accuracy}</td>
+            </tr>`
+        ).join('')}
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th colspan="4">Hard Regular</th>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Rank</th>
+                <th scope="row">Name</th>
+                <th scope="row">Points</th>
+                <th scope="row">Accuracy</th>
+            </tr>
+        </thead>
+        ${hard.map((hardscore,ind) => 
+            `<tr>
+                <td>${ind+1}</td>
+                <td>${hardscore.first_name}</td>
+                <td>${hardscore.points}</td>
+                <td>${hardscore.accuracy}</td>
+            </tr>`
+        ).join('')}
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th colspan="4">Apocalypse Regular</th>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Rank</th>
+                <th scope="row">Name</th>
+                <th scope="row">Points</th>
+                <th scope="row">Accuracy</th>
+            </tr>
+        </thead>
+        ${apoc.map((apocscore,ind) => 
+            `<tr>
+                <td>${ind+1}</td>
+                <td>${apocscore.first_name}</td>
+                <td>${apocscore.points}</td>
+                <td>${apocscore.accuracy}</td>
+            </tr>`
+        ).join('')}
+    </table>
+</section>
