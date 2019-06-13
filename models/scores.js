@@ -9,12 +9,16 @@ class Scores {
         this.mode_id = mode_id;
     }
 
-    static async getAllScores() {
+    static async getScores(gId) {
         try {
             const response = await db.any(`     
-                
-        
-            `);
+                select s.points, s.accuracy, u.f_name, g.difficulty, g.mode
+                from scores as s 
+                left join users as u on s.user_id = u.id 
+                left join game_modes as g on g.id = s.game_mode_id
+                where g.id = $1
+                order by points desc limit 10;
+                `, [gId]);
             return response;
         } catch(err) {
             return(err.message);
