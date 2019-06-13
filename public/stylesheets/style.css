@@ -12,6 +12,16 @@ a {
   height:200px;
   border:1px solid red;
   position:relative;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#startCountDown{
+  visibility: hidden;
+  border:1px solid red;
+  font-size:3em;
+  text-align: center;
 }
 
 #target{
