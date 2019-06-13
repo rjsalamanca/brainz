@@ -26,6 +26,9 @@ async function gameStart(mode,difficulty) {
     timerContainer.innerHTML = 60;
     document.getElementById('score').innerHTML = 0;
     document.getElementById('accuracy').innerHTML = '0.00%';
+    document.getElementById('accuracySend').value = 0.00;
+    document.getElementById('pointsSend').value = 0;
+
     clicks = 0;
     targetClicks = 0;
     totalScore = 0;
@@ -42,6 +45,9 @@ async function gameStart(mode,difficulty) {
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
                 document.getElementById('target').remove();
+
+                // SUBMIT FORM WHEN DONE
+                document.getElementById('gameInfo').submit()
 
             } else {
                 timerContainer.innerHTML = 60 - seconds;

@@ -15,18 +15,6 @@ router.get('/', function(req, res, next) {
     });
 });
 
-// router.get('/regular', function(req, res, next) {
-//     res.render('template', 
-//     { 
-//         locals:{
-//             title: 'Regular'
-//         },
-//         partials: {
-//             partial:'partial-games-regular'
-//         }
-//     });
-// });
-
 router.get('/:mode', function(req, res, next) {    
     res.render('template', 
     { 
@@ -49,7 +37,8 @@ router.get('/:mode/:difficulty', async (req, res) => {
         { 
             locals:{
                 title: 'LETS PLAY!',
-                gameMode: getGameMode
+                gameMode: getGameMode,
+                firstPlay: true
             },
             partials: {
                 partial:'partial-games-play'
@@ -68,6 +57,7 @@ router.get('/:mode/:difficulty', async (req, res) => {
     }
 });
 
+
 router.post('/', async (req, res, next) => {
     const { mode, difficulty } = req.body;
     
@@ -83,6 +73,27 @@ router.post('/', async (req, res, next) => {
     //         partial:'partial-scores'
     //     }
     // });
+});
+
+router.post('/:gameMode/:difficulty', async (req, res, next) => {
+    const { accuracy, points, userId, gameModeId } = req.body;
+    const { gameMode, difficulty } = req.params;
+    const gameInstance = new Games(gameMode,difficulty);
+    const getGameMode = await gameInstance.isGameMode();
+
+    await Games.addScore(accuracy, points, userId, gameModeId);
+    res.render('template', 
+    { 
+        locals:{
+            title: 'LETS PLAY!',
+            gameMode: getGameMode,
+            firstPlay: false,
+            previousScore: req.body
+        },
+        partials: {
+            partial:'partial-games-play'
+        }
+    });
 });
 
 module.exports = router;
