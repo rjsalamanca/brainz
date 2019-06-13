@@ -4,7 +4,8 @@ const express = require('express'),
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('template', { 
-    locals: {
+    locals:{
+      isLoggedIn: req.session.loggedIn,
       title: 'Home Page'
     },
     partials: {

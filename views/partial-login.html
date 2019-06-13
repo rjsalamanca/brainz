@@ -1,0 +1,33 @@
+
+<!-- <h1>Register</h1> -->
+    <!-- <form action = '/users/add-user' method ='POST'>
+        <input type = "text" name="name"/>
+        <input type = "password" name ="pass"/>
+        <button type = "submit">Add</button>
+    </form> -->
+    
+    <div class="container">
+            <form action = '/users/login' method ='POST'>
+                <fieldset>
+                    <legend></legend>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" "password" name ="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        </fieldset>
+                            <button type="submit" class="btn btn-danger">Submit</button>
+                </fieldset>
+            </form>
+            ${passwordCheck == true? `<div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Oh snap!</strong> <a href="#" class="alert-link">Invalid Password</a> and try submitting again.
+                    </div>`:``}
+            <p class="lead mt-4">
+                No Account? <a href="/users/add-user">Register</a>
+            </p>
+        </dir>
