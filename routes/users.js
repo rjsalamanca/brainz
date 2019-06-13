@@ -4,6 +4,14 @@ const db = require('../models/conn.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
+const session = require('express-session');
+const Users = require('../models/users.js');
+
+router.use(session({
+  secret:'supbruh',
+  resave: false,
+  saveUninitialized: false
+}));
 
 
 
@@ -14,6 +22,8 @@ router.get('/', function(req, res, next) {
   // res.render('partial-users');
   res.render('template', { 
     locals:{
+      isLoggedIn: req.session.loggedIn,
+      welcome: `Hello ${req.session.user.f_name}`,
       title: 'Users Page'
     },
     partials: {
@@ -24,9 +34,14 @@ router.get('/', function(req, res, next) {
 
 router.get('/add-user', (req,res) => {
   // res.render('partial-add-user');
+  console.log(req.session.user)
+
   res.render('template', { 
     locals:{
-      title: 'Register'
+      isLoggedIn: req.session.loggedIn,
+      title: 'Register',
+      emailCheck: false,
+      createdUserAlready: true
     },
     partials: {
       partial:'partial-add-user'
@@ -40,7 +55,10 @@ router.get('/login', (req,res) => {
   // res.render('partial-add-user');
   res.render('template', { 
     locals:{
-      title: 'Login'
+      isLoggedIn: req.session.loggedIn,
+      title: 'Login',
+      passwordCheck: true,
+      createdUserAlready: false
     },
     partials: {
       partial:'partial-login'
@@ -49,16 +67,34 @@ router.get('/login', (req,res) => {
 
 });
 
+router.get('/logout', (req,res) =>{
+  console.log('logging out');
+  req.session.destroy();
+  res.redirect('/');
+});
+
 router.post('/add-user', (req,res) =>{
   let email = req.body.email;
   let password = req.body.password;
   let f_name = req.body.f_name;
   let l_name = req.body.l_name;
+  //let userInstance = new Users(null, email,)
 
   db.oneOrNone('SELECT id FROM users WHERE email = $1', [email])
   .then((user)=> {
     if (user){
-      res.redirect('/users/login')
+      res.render('template', { 
+        locals:{
+          isLoggedIn: req.session.loggedIn,
+          title: 'Login',
+          passwordCheck: false,
+          createdUserAlready: true,
+          emailCheck: false
+        },
+        partials: {
+          partial:'partial-add-user'
+        }
+      });
     } else {
 
       bcrypt.hash(password,SALT_ROUNDS,function(error, hash){
@@ -73,10 +109,10 @@ router.post('/add-user', (req,res) =>{
     };
   });
 
-  if(req.session){
-      req.session.name = email;
-      req.session.pass = password;
-  };
+  // if(req.session){
+  //     req.session.email = email;
+  //     req.session.password = password;
+  // };
 
   console.log(f_name);
   console.log(l_name);
@@ -91,28 +127,63 @@ router.post('/login', (req,res) =>{
   let email = req.body.email;
   let password = req.body.password;
 
-  db.oneOrNone('SELECT id, password FROM users WHERE email = $1', [email])
+  db.oneOrNone('SELECT id, password, email, f_name FROM users WHERE email = $1', [email])
   .then((user)=> {
     if (user){
       bcrypt.compare(password,user.password,function(error,result){
         if(result){
-          res.redirect('/users')
-          console.log('success')
+          req.session.loggedIn = true;
+          req.session.user = {id: user.id, email: user.email, f_name: user.f_name}
+          console.log(req.session.user)
+
+          res.render('template', { 
+            locals:{
+              isLoggedIn: req.session.loggedIn,
+              title: 'User Page',
+              welcome: `Hello ${user.f_name}`
+            },
+            partials: {
+              partial:'partial-users'
+            }
+          });
+          // if(req.session){
+          //   req.session.loggedIn = true;
+          //   req.session.user = {id: user.id, email: user.email}
+          //   console.log(req.session.user)
+          // };
+          // console.log('success')
         } else {
-          res.redirect('/users/login')
+          res.render('template', { 
+            locals:{
+              isLoggedIn: req.session.loggedIn,
+              title: 'Login',
+              passwordCheck: true,
+              createdUserAlready: false
+            },
+            partials: {
+              partial:'partial-add-user'
+            }
+          });
+          //res.redirect('/users/login')
           console.log('wrong password')
         }
       })
     } else {
-      res.redirect('/users/login')
+      res.render('template', { 
+        locals:{
+          isLoggedIn: req.session.loggedIn,
+          title: 'Login',
+          emailCheck: false,
+          createdUserAlready: true
+        },
+        partials: {
+          partial:'partial-login'
+        }
+      });
       console.log('wrong')
     }
   });
 
-  if(req.session){
-      req.session.name = email;
-      req.session.pass = password;
-  };
 
 });
 

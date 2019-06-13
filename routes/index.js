@@ -5,6 +5,7 @@ const express = require('express'),
 router.get('/', function(req, res, next) {
   res.render('template', { 
     locals:{
+      isLoggedIn: req.session.loggedIn,
       title: 'Home Page'
     },
     partials: {

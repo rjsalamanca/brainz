@@ -1,6 +1,6 @@
 const express = require('express'),
     path = require('path'),
-
+    session = require('express-session'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
     es6Renderer = require('express-es6-template-engine'),
@@ -21,6 +21,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret:'supbruh',
+    resave: false,
+    saveUninitialized: false,
+    isLoggedIn: false
+}));
 
 
 app.use('/', indexRouter);

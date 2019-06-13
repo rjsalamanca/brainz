@@ -30,5 +30,17 @@
                     <button type="submit" class="btn btn-danger">Submit</button>
         </fieldset>
     </form>
+    ${emailCheck == true? `<div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Oh snap!</strong> <a href="#" class="alert-link">Invalid Email or Password</a> and try submitting again.
+            </div>`:``}
+
+    ${createdUserAlready == true? `<div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Oh snap!</strong> <a href="#" class="alert-link">User already created</a>
+            </div>`:``}
+
+    
+    <p class="lead mt-4">
     <p class="lead mt-4">Have An Account? <a href="/users/login">Login</a></p>
 </dir>

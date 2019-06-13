@@ -4,7 +4,7 @@
     <title>DB PROJECT| ${title}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href='/stylesheets/bootstrap.min.css'
+    <link rel="stylesheet" href='/stylesheets/bootstrap.min.css'/>
     <link rel="stylesheet" href="/stylesheets/style.css"/>
 </head>
 <body>
@@ -17,17 +17,31 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="/scores">High Scores</a>
+                </li>
+                
+
+                ${isLoggedIn == true ? 
+                    `<li class="nav-item">
+                        <a class="nav-link" href="/users">Profile</a>
+                        </li>
+                            
+                        <li class="nav-item">
+                        <a class="nav-link" href="/users/logout">Logout</a>
+                        </li>
+                        </li>`   
+                :`
+                <li class="nav-item">
+                <a class="nav-link" href="/users/login">Login</a>
+                </li>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-                </li>
+                <a class="nav-link" href="/users/add-user">Register</a>
+                </li>`}
+
             </ul>
             </div>
         </nav>

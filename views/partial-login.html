@@ -5,6 +5,7 @@
         <input type = "password" name ="pass"/>
         <button type = "submit">Add</button>
     </form> -->
+    
     <div class="container">
             <form action = '/users/login' method ='POST'>
                 <fieldset>
@@ -22,6 +23,10 @@
                             <button type="submit" class="btn btn-danger">Submit</button>
                 </fieldset>
             </form>
+            ${passwordCheck == true? `<div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Oh snap!</strong> <a href="#" class="alert-link">Invalid Password</a> and try submitting again.
+                    </div>`:``}
             <p class="lead mt-4">
                 No Account? <a href="/users/add-user">Register</a>
             </p>
