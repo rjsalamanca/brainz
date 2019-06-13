@@ -26,6 +26,9 @@ async function gameStart(mode,difficulty) {
     timerContainer.innerHTML = 60;
     document.getElementById('score').innerHTML = 0;
     document.getElementById('accuracy').innerHTML = '0.00%';
+    document.getElementById('accuracySend').value = 0.00;
+    document.getElementById('pointsSend').value = 0;
+
     clicks = 0;
     targetClicks = 0;
     totalScore = 0;
@@ -37,11 +40,14 @@ async function gameStart(mode,difficulty) {
 
         let gameTimer = setInterval(() => {
             seconds++
-            if (seconds == 3) {
+            if (seconds == 60) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
                 document.getElementById('target').remove();
+
+                // SUBMIT FORM WHEN DONE
+                document.getElementById('gameInfo').submit()
 
             } else {
                 timerContainer.innerHTML = 60 - seconds;
@@ -53,8 +59,13 @@ async function gameStart(mode,difficulty) {
             createTarget(75,3000);
         } else if(difficulty == 'medium') {
             console.log('med')
+            createTarget(40,2000);
         } else if(difficulty == 'hard'){
             console.log('hard')
+            createTarget(25,1000);
+        }else if(difficulty == 'apocalypse'){
+            console.log('apocalypse')
+            createTarget(10,200);
         }
     }
 }

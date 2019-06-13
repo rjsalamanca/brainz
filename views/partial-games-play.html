@@ -1,7 +1,36 @@
+${!firstPlay ? 
+`
+    <script>
+        $(document).ready(function(){
+            $("#scoresModal").modal('show');
+        });
+    </script>
+
+    <div class="modal fade" id="scoresModal" tabindex="-1" role="dialog" aria-labelledby="scoresModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scoresModalLongTitle">Your Score:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Well Done!</h4>
+                    <p>You got ${previousScore.points} points with ${previousScore.accuracy}% accuracy! </p>
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+`: ``}
+
 <div id='game'>
     <div id='startCountDown'>Starting in: <br/><span id='startCountDownNumber'>3</span></div>
 </div>
-
 <br/>
 <section>
     Time Left: <span id='timeLeft'>60</span><br/><br/>
@@ -9,10 +38,10 @@
     Accuracy: <span id='accuracy'>0.00</span>%
 </section><br/><br/>
 <button type='button' onclick="gameStart('${gameMode.mode}','${gameMode.difficulty}')">START GAME</button>
-<form id='gameInfo' method='POST'>
+<form id='gameInfo' action='/games/${gameMode.mode}/${gameMode.difficulty}'method='POST'>
     <input type="hidden" id='accuracySend' name='accuracy' value=''>
     <input type="hidden" id='pointsSend' name='points' value=''>
     <input type="hidden" id='userIDSend' name='userId' value='1'>
-    <input type="hidden" id='gameModeIDSend' name='gameModeID' value='${gameMode.id}'>
+    <input type="hidden" id='gameModeIDSend' name='gameModeId' value='${gameMode.id}'>
 </form>
 <script type="text/javascript" src="/javascripts/aimGame.js"></script>
