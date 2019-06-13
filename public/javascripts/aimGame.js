@@ -40,7 +40,7 @@ async function gameStart(mode,difficulty) {
 
         let gameTimer = setInterval(() => {
             seconds++
-            if (seconds == 3) {
+            if (seconds == 60) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
@@ -59,8 +59,13 @@ async function gameStart(mode,difficulty) {
             createTarget(75,3000);
         } else if(difficulty == 'medium') {
             console.log('med')
+            createTarget(40,2000);
         } else if(difficulty == 'hard'){
             console.log('hard')
+            createTarget(25,1000);
+        }else if(difficulty == 'apocalypse'){
+            console.log('apocalypse')
+            createTarget(10,200);
         }
     }
 }
