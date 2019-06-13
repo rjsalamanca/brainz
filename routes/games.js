@@ -43,6 +43,7 @@ router.get('/:mode/:difficulty', async (req, res) => {
     const { mode, difficulty} = req.params;
     const gameInstance = new Games(mode,difficulty);
     const getGameMode = await gameInstance.isGameMode();
+    
     if(typeof getGameMode === 'object'){
         res.render('template', 
         { 

@@ -11,7 +11,8 @@ let gameRunning = false,
 document.body.addEventListener('click', function(){
     if(gameRunning == true){
         let calculatedAcc = ((targetClicks/clicks)*100).toFixed(2);
-        accuracy.innerHTML = calculatedAcc == 'NaN' ? `0.00%`:`${calculatedAcc}%`;
+        accuracy.innerHTML = calculatedAcc == 'NaN' ? `0.00`:`${calculatedAcc}`;
+        document.getElementById('accuracySend').value = accuracy.innerHTML;
         clicks++;
     }
 });
@@ -36,11 +37,12 @@ async function gameStart(mode,difficulty) {
 
         let gameTimer = setInterval(() => {
             seconds++
-            if (seconds == 60) {
+            if (seconds == 3) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
                 document.getElementById('target').remove();
+
             } else {
                 timerContainer.innerHTML = 60 - seconds;
             }
@@ -124,6 +126,7 @@ class Target {
 
             totalScore += score;
             document.getElementById('score').innerHTML = totalScore;
+            document.getElementById('pointsSend').value = totalScore;
 
             //CLEAR THE GAME AREA   
             //gameContainer.innerHTML = '';

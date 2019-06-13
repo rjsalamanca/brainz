@@ -6,8 +6,13 @@
 <section>
     Time Left: <span id='timeLeft'>60</span><br/><br/>
     Score: <span id='score'>0</span><br/>
-    Accuracy: <span id='accuracy'>0.00%</span>
+    Accuracy: <span id='accuracy'>0.00</span>%
 </section><br/><br/>
-
 <button type='button' onclick="gameStart('${gameMode.mode}','${gameMode.difficulty}')">START GAME</button>
+<form id='gameInfo' method='POST'>
+    <input type="hidden" id='accuracySend' name='accuracy' value=''>
+    <input type="hidden" id='pointsSend' name='points' value=''>
+    <input type="hidden" id='userIDSend' name='userId' value='1'>
+    <input type="hidden" id='gameModeIDSend' name='gameModeID' value='${gameMode.id}'>
+</form>
 <script type="text/javascript" src="/javascripts/aimGame.js"></script>
