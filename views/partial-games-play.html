@@ -28,6 +28,8 @@ ${!firstPlay ?
     </div>
 `: ``}
 
+<div>${user}</div>
+
 <div id='game'>
     <div id='startCountDown'>Starting in: <br/><span id='startCountDownNumber'>3</span></div>
 </div>
@@ -37,6 +39,7 @@ ${!firstPlay ?
     Score: <span id='score'>0</span><br/>
     Accuracy: <span id='accuracy'>0.00</span>%
 </section><br/><br/>
+
 <button type='button' onclick="gameStart('${gameMode.mode}','${gameMode.difficulty}')">START GAME</button>
 <form id='gameInfo' action='/games/${gameMode.mode}/${gameMode.difficulty}'method='POST'>
     <input type="hidden" id='accuracySend' name='accuracy' value=''>

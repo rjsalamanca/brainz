@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
     res.render('template', { 
         locals: {
             title: 'Scores',
-            isLoggedIn: req.session.isLoggedIn,
+            isLoggedIn: req.session.loggedIn,
             easy: easyRegScores,
             med: medRegScores,
             hard: hardRegScores,

@@ -4,16 +4,7 @@ const db = require('../models/conn.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
-const session = require('express-session');
 const Users = require('../models/users.js');
-
-router.use(session({
-  secret:'supbruh',
-  resave: false,
-  saveUninitialized: false
-}));
-
-
 
 router.use(bodyParser.urlencoded({extended: false}));
 
@@ -134,7 +125,7 @@ router.post('/login', (req,res) =>{
         if(result){
           req.session.loggedIn = true;
           req.session.user = {id: user.id, email: user.email, f_name: user.f_name}
-          console.log(req.session.user)
+          console.log('we logged in with: ', req.session.user)
 
           res.render('template', { 
             locals:{
@@ -183,7 +174,6 @@ router.post('/login', (req,res) =>{
       console.log('wrong')
     }
   });
-
 
 });
 

@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret:'supbruh',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     isLoggedIn: false
 }));
 

@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     { 
         locals:{
             title: 'Games',
-            isLoggedIn: req.session.isLoggedIn
+            isLoggedIn: req.session.loggedIn
         },
         partials: {
             partial:'partial-games'
@@ -21,7 +21,7 @@ router.get('/:mode', function(req, res, next) {
     { 
         locals:{
             title: 'Choose Game Mode First',
-            isLoggedIn: req.session.isLoggedIn
+            isLoggedIn: req.session.loggedIn
         },
         partials: {
             partial:'partial-games'
@@ -41,7 +41,8 @@ router.get('/:mode/:difficulty', async (req, res) => {
                 title: 'LETS PLAY!',
                 gameMode: getGameMode,
                 firstPlay: true,
-                isLoggedIn: req.session.isLoggedIn
+                isLoggedIn: req.session.loggedIn,
+                user: req.session.user.id
             },
             partials: {
                 partial:'partial-games-play'
@@ -59,7 +60,6 @@ router.get('/:mode/:difficulty', async (req, res) => {
         });
     }
 });
-
 
 router.post('/', async (req, res, next) => {
     const { mode, difficulty } = req.body;
@@ -92,7 +92,8 @@ router.post('/:gameMode/:difficulty', async (req, res, next) => {
             gameMode: getGameMode,
             firstPlay: false,
             previousScore: req.body,
-            isLoggedIn: req.session.isLoggedIn
+            isLoggedIn: req.session.isLoggedIn,
+            user: req.session.user
         },
         partials: {
             partial:'partial-games-play'

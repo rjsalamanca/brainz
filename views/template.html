@@ -20,34 +20,35 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/scores">High Scores</a>
+                    <a class="nav-link" href="/scores">High Scores</a>
                 </li>
-                
+                <li class="nav-item">
+                    <a class="nav-link" href="/games">Games</a>
+                </li>
 
                 ${isLoggedIn == true ? 
-                    `<li class="nav-item">
-                        <a class="nav-link" href="/users">Profile</a>
-                        </li>
-                            
-                        <li class="nav-item">
-                        <a class="nav-link" href="/users/logout">Logout</a>
-                        </li>
-                        </li>`   
-                :`
+                `
                 <li class="nav-item">
-                <a class="nav-link" href="/users/login">Login</a>
-                </li>
+                    <a class="nav-link" href="/users">Profile</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/users/add-user">Register</a>
-                </li>`}
-
+                    <a class="nav-link" href="/users/logout">Logout</a>
+                </li>
+                `:`
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/add-user">Register</a>
+                </li>
+                `}
             </ul>
-            </div>
-        </nav>
+        </div>
+
+    </nav>
     <h1>${title}</h1>
     <main>${partial}</main>
 
