@@ -1,6 +1,6 @@
 #game {
   width:100%;
-  height:200px;
+  height:60%;
   border:1px solid red;
   position:relative;
   display:flex;
@@ -15,14 +15,18 @@
   text-align: center;
 }
 
-#target{
+#targetContainer{
   position:absolute;
-  border:1px solid red;
-  top: calc(0% - 100px);
-  width:50px;
-  height:100px;
-  transition:height 0.2s;
+  overflow:hidden;
 }
+
+#target{
+  margin-top:200%;
+  border:1px solid red;
+  height:0px;
+  transition: margin-top 1s;
+}
+
 
 #target:hover{
   background-color:red;

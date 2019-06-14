@@ -37,7 +37,6 @@ async function gameStart(mode,difficulty) {
         gameRunning = true;
         await startTime();
 
-
         let gameTimer = setInterval(() => {
             seconds++
             if (seconds == 60) {
@@ -56,7 +55,7 @@ async function gameStart(mode,difficulty) {
 
         if(difficulty == 'easy'){
             console.log('ez')
-            createTarget(75,3000);
+            createTarget(75,1000);
         } else if(difficulty == 'medium') {
             console.log('med')
             createTarget(40,2000);
@@ -78,7 +77,7 @@ async function startTime() {
     countDownContainer.style.visibility = 'visible';
     countDownNumber.innerHTML = time;
 
-    while (time > 0) {
+    while (time > 2) {
         await wait1s(1000);
         time--;
         console.log(`Starting in: ${time}`);
@@ -102,32 +101,38 @@ class Target {
     }
 
     async populate() {
-        gameContainer.innerHTML += `<div id='target'></div>`;
+        gameContainer.innerHTML += `<div id='targetContainer'><div id='target'></div></div>`;
 
-        const targetNode = document.getElementById('target'),
+        const targetContainer = document.getElementById('targetContainer'),
+            targetNode = document.getElementById('target'),
             storeSize = this.size,
             storeSpeed = this.speed,
-            startTime = new Date(),
-            randomHeight = Math.floor(Math.random() * 100) + 1,
-            randomWidth = Math.floor(Math.random() * 100) + 1;
+            startTime = new Date();
 
-        target.style.height = `${this.size * 2}px`;
-        target.style.width = `${this.size}px`;
-        target.style.right = `${randomWidth}%`;
-        target.style.top = `${randomHeight}%`;
+        let randomHeight = Math.floor(Math.random() * (100-(((this.size*2)/gameContainer.scrollHeight)*100)) ) + 1,
+            randomWidth = Math.floor(Math.random() * (100-(((this.size)/gameContainer.scrollWidth)*100)) ) + 1;
+        
+        targetContainer.style.height = `${this.size * 2}px`;
+        targetContainer.style.width = `${this.size}px`;
+        targetContainer.style.right = `${randomWidth}%`;
+        targetContainer.style.top = `${randomHeight}%`;
+        
+        targetNode.style.height = `${this.size * 2}px`;
+        targetNode.style.width = `${this.size}px`;
+        targetNode.style.marginTop = 0;
         
         // Moves target when after specific amount of seconds
         moveTimer = setTimeout((res) => {
             if (target) {
                 console.log('Moving Target')               
-                targetNode.remove();
+                targetContainer.remove();
                 clearTimeout(moveTimer);
                 createTarget(this.size,this.speed);
             }
         }, this.speed);
 
         // Activates when we click the target
-        target.addEventListener('click', function (e) {
+        targetNode.addEventListener('click', function (e) {
             const endTime = new Date();
 
             let timeDiff = endTime - startTime,
@@ -142,7 +147,7 @@ class Target {
             //CLEAR THE GAME AREA   
             //gameContainer.innerHTML = '';
             //targetNode.style.height = '0px'
-            targetNode.remove();
+            targetContainer.remove();
             targetClicks++;
 
             //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.

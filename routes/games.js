@@ -42,7 +42,7 @@ router.get('/:mode/:difficulty', async (req, res) => {
                 gameMode: getGameMode,
                 firstPlay: true,
                 isLoggedIn: req.session.loggedIn,
-                user: req.session.user.id
+                user: req.session.user
             },
             partials: {
                 partial:'partial-games-play'
@@ -92,7 +92,7 @@ router.post('/:gameMode/:difficulty', async (req, res, next) => {
             gameMode: getGameMode,
             firstPlay: false,
             previousScore: req.body,
-            isLoggedIn: req.session.isLoggedIn,
+            isLoggedIn: req.session.loggedIn,
             user: req.session.user
         },
         partials: {

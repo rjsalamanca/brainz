@@ -16,7 +16,8 @@ ${!firstPlay ?
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h4>Well Done!</h4>
+                    <h4>Well done ${isLoggedIn ? `${user.f_name}` : `Zombie`}...</h4>
+                    <br/>
                     <p>You got ${previousScore.points} points with ${previousScore.accuracy}% accuracy! </p>
                     <p></p>
                 </div>
@@ -26,12 +27,22 @@ ${!firstPlay ?
             </div>
         </div>
     </div>
+    
 `: ``}
 
-<div>${user}</div>
+<style>
+    #gameContainer{
+        border:1px solid red;
+    }
+    #target{
+        border:1px solid blue;
+    }
+</style>
 
-<div id='game'>
-    <div id='startCountDown'>Starting in: <br/><span id='startCountDownNumber'>3</span></div>
+<div id='gameContainer'>
+    <div id='game'>
+        <div id='startCountDown'>Starting in: <br/><span id='startCountDownNumber'>3</span></div>
+    </div>
 </div>
 <br/>
 <section>
@@ -44,7 +55,11 @@ ${!firstPlay ?
 <form id='gameInfo' action='/games/${gameMode.mode}/${gameMode.difficulty}'method='POST'>
     <input type="hidden" id='accuracySend' name='accuracy' value=''>
     <input type="hidden" id='pointsSend' name='points' value=''>
-    <input type="hidden" id='userIDSend' name='userId' value='1'>
+    ${isLoggedIn == true ? `
+        <input type="hidden" id='userIDSend' name='userId' value='${user.id}'>
+    `:`
+        <input type="hidden" id='userIDSend' name='userId' value='1'>
+    `}
     <input type="hidden" id='gameModeIDSend' name='gameModeId' value='${gameMode.id}'>
 </form>
 <script type="text/javascript" src="/javascripts/aimGame.js"></script>
