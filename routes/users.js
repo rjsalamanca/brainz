@@ -6,17 +6,26 @@ const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
 
 const Users = require('../models/users.js');
+const scoresModel = require('../models/scores.js');
 
 router.use(bodyParser.urlencoded({extended: false}));
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  // res.render('partial-users');
+router.get('/', async (req, res, next) => {
+  const easyRegScores = await scoresModel.getUserScores(1, req.session.user.id);
+  const medRegScores = await scoresModel.getUserScores(2, req.session.user.id);
+  const hardRegScores = await scoresModel.getUserScores(3, req.session.user.id);
+
+  const easyRecScores = await scoresModel.getRecentScores(1, req.session.user.id);
   res.render('template', { 
     locals:{
       isLoggedIn: req.session.loggedIn,
       welcome: `Hello ${req.session.user.f_name}`,
-      title: 'Users Page'
+      title: 'Users Page',
+      easy: easyRegScores,
+      med: medRegScores,
+      hard: hardRegScores,
+      receasy: easyRecScores
     },
     partials: {
       partial:'partial-users'
@@ -141,19 +150,10 @@ router.post('/login', (req,res) =>{
       bcrypt.compare(password,user.password,function(error,result){
         if(result){
           req.session.loggedIn = true;
-          req.session.user = {id: user.id, email: user.email, f_name: user.f_name}
+          req.session.user = { id: user.id, email: user.email, f_name: user.f_name }
           console.log('we logged in with: ', req.session.user)
-
-          res.render('template', { 
-            locals:{
-              isLoggedIn: req.session.loggedIn,
-              title: 'User Page',
-              welcome: `Hello ${user.f_name}`
-            },
-            partials: {
-              partial:'partial-users'
-            }
-          });
+          
+          res.redirect('/users');
           // if(req.session){
           //   req.session.loggedIn = true;
           //   req.session.user = {id: user.id, email: user.email}
