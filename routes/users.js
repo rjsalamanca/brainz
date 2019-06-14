@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
   const medRegScores = await scoresModel.getUserScores(2, req.session.user.id);
   const hardRegScores = await scoresModel.getUserScores(3, req.session.user.id);
 
-  const easyRecScores = await scoresModel.getRecentScores(1, req.session.user.id);
+  const recentScores = await scoresModel.getRecentScores(req.session.user.id);
   res.render('template', { 
     locals:{
       isLoggedIn: req.session.loggedIn,
@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
       easy: easyRegScores,
       med: medRegScores,
       hard: hardRegScores,
-      receasy: easyRecScores
+      recent: recentScores
     },
     partials: {
       partial:'partial-users'
