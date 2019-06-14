@@ -4,6 +4,7 @@ const db = require('../models/conn.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
+
 const Users = require('../models/users.js');
 
 router.use(bodyParser.urlencoded({extended: false}));
@@ -32,7 +33,7 @@ router.get('/add-user', (req,res) => {
       isLoggedIn: req.session.loggedIn,
       title: 'Register',
       emailCheck: false,
-      createdUserAlready: true
+      createdUserAlready: false
     },
     partials: {
       partial:'partial-add-user'
@@ -48,8 +49,10 @@ router.get('/login', (req,res) => {
     locals:{
       isLoggedIn: req.session.loggedIn,
       title: 'Login',
-      passwordCheck: true,
-      createdUserAlready: false
+      passwordCheck: false,
+      createdUserAlready: false,
+      newUser: false,
+      noUser: false
     },
     partials: {
       partial:'partial-login'
@@ -71,16 +74,17 @@ router.post('/add-user', (req,res) =>{
   let l_name = req.body.l_name;
   //let userInstance = new Users(null, email,)
 
-  db.oneOrNone('SELECT id FROM users WHERE email = $1', [email])
+  db.oneOrNone('SELECT id, f_name FROM users WHERE email = $1', [email])
   .then((user)=> {
     if (user){
       res.render('template', { 
         locals:{
           isLoggedIn: req.session.loggedIn,
-          title: 'Login',
+          title: 'Register',
           passwordCheck: false,
           createdUserAlready: true,
-          emailCheck: false
+          newUser: false,
+          noUser: false
         },
         partials: {
           partial:'partial-add-user'
@@ -93,7 +97,20 @@ router.post('/add-user', (req,res) =>{
           db.none('INSERT INTO users(email, password, f_name, l_name) VALUES($1,$2,$3,$4)',[email,hash,f_name,l_name])
           .then(() => {
             console.log('SUCCESS')
-            res.redirect('/users');
+            res.render('template', { 
+              locals:{
+                isLoggedIn: req.session.loggedIn,
+                title: 'Login',
+                createdUserAlready: false,
+                passwordCheck: false,
+                newUser: true,
+                noUser: false
+              },
+              partials: {
+                partial:'partial-login'
+              }
+            });
+            // res.redirect('/users/login');
         });
         }
       })
@@ -149,10 +166,12 @@ router.post('/login', (req,res) =>{
               isLoggedIn: req.session.loggedIn,
               title: 'Login',
               passwordCheck: true,
-              createdUserAlready: false
+              createdUserAlready: false,
+              newUser: false,
+              noUser: false
             },
             partials: {
-              partial:'partial-add-user'
+              partial:'partial-login'
             }
           });
           //res.redirect('/users/login')
@@ -164,8 +183,10 @@ router.post('/login', (req,res) =>{
         locals:{
           isLoggedIn: req.session.loggedIn,
           title: 'Login',
-          emailCheck: false,
-          createdUserAlready: true
+          createdUserAlready: false,
+          newUser: false,
+          passwordCheck: false,
+          noUser: true
         },
         partials: {
           partial:'partial-login'
