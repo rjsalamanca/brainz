@@ -25,7 +25,17 @@
             </form>
             ${passwordCheck == true? `<div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Oh snap!</strong> <a href="#" class="alert-link">Invalid Password</a> and try submitting again.
+                    <strong>Oh $h%+!</strong> <a href="#" class="alert-link">Invalid Password</a> , use your brainZ and try submitting again.
+                    </div>`:``}
+
+            ${newUser == true? `<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>F*#% Yeah!</strong> <a href="#" class="alert-link">Successfully registered</a> , please login.
+                    </div>`:``}
+
+            ${noUser == true? `<div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Oh $h%+!</strong> <a href="#" class="alert-link">User not registered</a> , please register.
                     </div>`:``}
             <p class="lead mt-4">
                 No Account? <a href="/users/add-user">Register</a>
