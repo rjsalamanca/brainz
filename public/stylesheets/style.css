@@ -25,6 +25,8 @@
   border:1px solid red;
   height:0px;
   transition: margin-top 1s;
+  background: url(../images/zombie.png);
+  background-size: 100% 100%;
 }
 
 
