@@ -4,7 +4,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th colspan="4">Easy Regular</th>
+                <th colspan="4">Top 10 Easy Scores</th>
             </tr>
             <tr class="table-dark">
                 <th scope="row">Rank</th>
@@ -24,7 +24,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th colspan="4">Medium Regular</th>
+                <th colspan="4">Top 10 Medium Scores</th>
             </tr>
             <tr class="table-dark">
                 <th scope="row">Rank</th>
@@ -44,7 +44,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th colspan="4">Hard Regular</th>
+                <th colspan="4">Top 10 Hard Scores</th>
             </tr>
             <tr class="table-dark">
                 <th scope="row">Rank</th>
@@ -64,19 +64,21 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th colspan="4">Recent Easy Scores</th>
+                <th colspan="4">Most Recent Scores</th>
             </tr>
             <tr class="table-dark">
                 <th scope="row">Rank</th>
                 <th scope="row">Points</th>
                 <th scope="row">Accuracy</th>
+                <th scope="row">Difficulty</th>
             </tr>
         </thead>
-        ${receasy.map((receasyscore,ind) => 
+        ${recent.map((recentscore,ind) => 
             `<tr>
                 <td>${ind+1}</td>
-                <td>${receasyscore.points}</td>
-                <td>${receasyscore.accuracy}</td>
+                <td>${recentscore.points}</td>
+                <td>${recentscore.accuracy}</td>
+                <td>${recentscore.difficulty}</td>
             </tr>`
         ).join('')}
     </table>
