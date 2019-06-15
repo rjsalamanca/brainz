@@ -65,7 +65,7 @@ async function gameStart(mode,difficulty) {
             createTarget(25,1000);
         }else if(difficulty == 'apocalypse'){
             console.log('apocalypse')
-            createTarget(10,200);
+            createTarget(50,400);
         }
     }
 }
@@ -105,6 +105,7 @@ class Target {
         gameContainer.innerHTML += `<div id='targetContainer'><img id='lastZ' src='/images/zombie/z-4.png'/><div id='target'><img id='zombieImg' src='/images/zombie/z-1.png'/></div></div>`;
 
         const targetContainer = document.getElementById('targetContainer'),
+            targetContainerFinalZ = document.getElementById('lastZ'),
             targetNode = document.getElementById('target'),
             targetZombie = document.getElementById('zombieImg'),
             storeSize = this.size,
@@ -115,7 +116,8 @@ class Target {
             randomWidth = Math.floor(Math.random() * (100-(((this.size)/gameContainer.scrollWidth)*100)) ) + 1,
             imageRotate = 0;
 
-            // targetContainer.style.height = '117px'
+        targetContainerFinalZ.style.width = `${this.size}px`
+        targetZombie.style.width = `${this.size}px`
 
         let zombieGif = setInterval(()=>{
             if(imageRotate == 0){
@@ -128,6 +130,7 @@ class Target {
                 targetZombie.src = '/images/zombie/z-4.png';
                 clearInterval(zombieGif);
             }
+            targetZombie.style.width = `${this.size}px`
 
             imageRotate++;
         },100)
