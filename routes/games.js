@@ -38,7 +38,7 @@ router.get('/:mode/:difficulty', async (req, res) => {
         res.render('template', 
         { 
             locals:{
-                title: 'LETS PLAY!',
+                title: 'Survive the Zombies!',
                 gameMode: getGameMode,
                 firstPlay: true,
                 isLoggedIn: req.session.loggedIn,
@@ -88,7 +88,7 @@ router.post('/:gameMode/:difficulty', async (req, res, next) => {
     res.render('template', 
     { 
         locals:{
-            title: 'LETS PLAY!',
+            title: 'Survive the Zombies!',
             gameMode: getGameMode,
             firstPlay: false,
             previousScore: req.body,

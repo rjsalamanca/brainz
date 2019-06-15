@@ -40,7 +40,7 @@ async function gameStart(mode,difficulty) {
         let gameTimer = setInterval(() => {
             seconds++
             // CHANGE THIS SO GAME RUNS QUICKER
-            if (seconds == 5) {
+            if (seconds == 500000) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
@@ -56,7 +56,7 @@ async function gameStart(mode,difficulty) {
 
         if(difficulty == 'easy'){
             console.log('ez')
-            createTarget(75,1000);
+            createTarget(75,100000000);
         } else if(difficulty == 'medium') {
             console.log('med')
             createTarget(40,2000);
@@ -102,24 +102,42 @@ class Target {
     }
 
     async populate() {
-        gameContainer.innerHTML += `<div id='targetContainer'><div id='target'></div></div>`;
+        gameContainer.innerHTML += `<div id='targetContainer'><img id='lastZ' src='/images/zombie/z-4.png'/><div id='target'><img id='zombieImg' src='/images/zombie/z-1.png'/></div></div>`;
 
         const targetContainer = document.getElementById('targetContainer'),
             targetNode = document.getElementById('target'),
+            targetZombie = document.getElementById('zombieImg'),
             storeSize = this.size,
             storeSpeed = this.speed,
             startTime = new Date();
 
         let randomHeight = Math.floor(Math.random() * (100-(((this.size*2)/gameContainer.scrollHeight)*100)) ) + 1,
-            randomWidth = Math.floor(Math.random() * (100-(((this.size)/gameContainer.scrollWidth)*100)) ) + 1;
-        
-        targetContainer.style.height = `${this.size * 2}px`;
-        targetContainer.style.width = `${this.size}px`;
+            randomWidth = Math.floor(Math.random() * (100-(((this.size)/gameContainer.scrollWidth)*100)) ) + 1,
+            imageRotate = 0;
+
+            // targetContainer.style.height = '117px'
+
+        let zombieGif = setInterval(()=>{
+            if(imageRotate == 0){
+                targetZombie.src = '/images/zombie/z-1.png';
+            } else if(imageRotate == 1) {
+                targetZombie.src = '/images/zombie/z-2.png';
+            } else if(imageRotate == 2) {
+                targetZombie.src = '/images/zombie/z-3.png';
+            } else if(imageRotate == 3) {
+                targetZombie.src = '/images/zombie/z-4.png';
+                clearInterval(zombieGif);
+            }
+
+            imageRotate++;
+        },100)
+        // targetContainer.style.height = `${this.size * 2}px`;
+        // targetContainer.style.width = `${this.size}px`;
         targetContainer.style.right = `${randomWidth}%`;
         targetContainer.style.top = `${randomHeight}%`;
         
-        targetNode.style.height = `${this.size * 2}px`;
-        targetNode.style.width = `${this.size}px`;
+        // targetNode.style.height = `${this.size * 2}px`;
+        // targetNode.style.width = `${this.size}px`;
         targetNode.style.marginTop = 0;
         
         // Moves target when after specific amount of seconds
