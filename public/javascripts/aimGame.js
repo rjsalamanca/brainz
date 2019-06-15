@@ -155,13 +155,15 @@ class Target {
 
         // Activates when we click the target
         targetNode.addEventListener('click', function (e) {
-            const endTime = new Date();
+            const endTime = new Date(),
+                hitTarget = document.getElementById('hitTarget');
 
             let timeDiff = endTime - startTime,
                 score = storeSpeed - timeDiff;
 
             console.log(`TIME TOOK: ${timeDiff} SCORE: ${score}`)
 
+            hitTarget.play();
             totalScore += score;
             document.getElementById('score').innerHTML = totalScore;
             document.getElementById('pointsSend').value = totalScore;

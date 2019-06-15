@@ -1,19 +1,33 @@
-#mainContentContainer{
+#mainContentContainer {
   padding:20px 50px;
 }
 
-#lastZ{
+#lastZ {
   opacity: 0;
+}
+
+#gameContainer {
+  margin-top:20px;
+  background-color:lightblue;
+}
+
+#gameInfo {
+  display:flex;
+  justify-content: space-between;
 }
 
 #game {
   width:100%;
   height:60%;
-  border:1px solid red;
   position:relative;
   display:flex;
   align-items: center;
   justify-content: center;
+  background: url(../images/grass.jpg);
+}
+
+#game:hover{
+  cursor: url(../images/white_crosshair.png)10 10, auto;
 }
 
 #startCountDown{
@@ -31,16 +45,25 @@
 }
 
 #target{
-  background: url(../images//zombie/zombie.png);
   background-size: 100% 100%;
-
 }
 
 #target:hover{
-  
+
+}
+#zombieImg{
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
+}
+#zombieImg:hover{
+  cursor: url(../images/red_crosshair.png)10 10, auto;
 }
 
-#zombieImg{
+#zombieImg:target{
+  cursor: url(../images/clicked.png)10 10, auto;
 }
 
 input[type="radio"][value="apocalypse"], input[type="radio"][value="apocalypse"]:checked{
