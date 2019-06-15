@@ -1,3 +1,7 @@
+#mainContentContainer{
+  padding:20px 50px;
+}
+
 #game {
   width:100%;
   height:60%;
