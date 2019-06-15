@@ -29,9 +29,43 @@
   background-size: 100% 100%;
 }
 
-
 #target:hover{
   background-color:red;
+}
+
+input[type="radio"][value="apocalypse"], input[type="radio"][value="apocalypse"]:checked{
+  display: none;
+}
+
+.gamesSelectionForm{
+  width:50%;
+  min-width:400px;
+  margin:0 auto;
+}
+
+.gameModeSelection{
+  display:flex;
+  margin:20px 0;
+}
+
+.gameModeSelection .btn{
+  width:50%;
+  margin-right:5px;
+}
+
+.gameModeSelection .btn:last-child{
+  margin-right:0px;
+}
+
+.gameDifficultySelection{
+  margin:10px 0 20px 0;
+}
+
+.apocalypse-btn{
+  opacity:0;
+}
+.apocalypse-btn:hover{
+  opacity:1;
 }
 
 .section {
