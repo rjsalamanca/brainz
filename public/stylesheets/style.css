@@ -35,3 +35,7 @@
 .table {
   display:block;
 }
+
+a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
+  cursor:url(../images/zombie-cursor-sized.png), auto;
+}
