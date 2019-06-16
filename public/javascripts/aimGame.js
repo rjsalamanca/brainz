@@ -14,6 +14,11 @@ document.body.addEventListener('click', function(){
         accuracy.innerHTML = calculatedAcc == 'NaN' ? `0.00`:`${calculatedAcc}`;
         document.getElementById('accuracySend').value = accuracy.innerHTML;
         clicks++;
+
+        let gun = document.getElementById('gun');
+        gun.src = '/images/gun-shot.png';
+        setTimeout(()=>{gun.src = '/images/gun.png'},100)
+
     }
 });
 
@@ -40,7 +45,7 @@ async function gameStart(mode,difficulty) {
         let gameTimer = setInterval(() => {
             seconds++
             // CHANGE THIS SO GAME RUNS QUICKER
-            if (seconds == 5) {
+            if (seconds == 500000) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
@@ -56,7 +61,7 @@ async function gameStart(mode,difficulty) {
 
         if(difficulty == 'easy'){
             console.log('ez')
-            createTarget(75,1000);
+            createTarget(75,100000000);
         } else if(difficulty == 'medium') {
             console.log('med')
             createTarget(40,2000);
@@ -65,7 +70,7 @@ async function gameStart(mode,difficulty) {
             createTarget(25,1000);
         }else if(difficulty == 'apocalypse'){
             console.log('apocalypse')
-            createTarget(10,200);
+            createTarget(50,400);
         }
     }
 }
@@ -102,24 +107,45 @@ class Target {
     }
 
     async populate() {
-        gameContainer.innerHTML += `<div id='targetContainer'><div id='target'></div></div>`;
+        gameContainer.innerHTML += `<div id='targetContainer'><img id='lastZ' src='/images/zombie/z-4.png'/><div id='target'><img id='zombieImg' src='/images/zombie/z-1.png'/></div></div>`;
 
         const targetContainer = document.getElementById('targetContainer'),
+            targetContainerFinalZ = document.getElementById('lastZ'),
             targetNode = document.getElementById('target'),
+            targetZombie = document.getElementById('zombieImg'),
             storeSize = this.size,
             storeSpeed = this.speed,
             startTime = new Date();
 
         let randomHeight = Math.floor(Math.random() * (100-(((this.size*2)/gameContainer.scrollHeight)*100)) ) + 1,
-            randomWidth = Math.floor(Math.random() * (100-(((this.size)/gameContainer.scrollWidth)*100)) ) + 1;
-        
-        targetContainer.style.height = `${this.size * 2}px`;
-        targetContainer.style.width = `${this.size}px`;
+            randomWidth = Math.floor(Math.random() * (100-(((this.size)/gameContainer.scrollWidth)*100)) ) + 1,
+            imageRotate = 0;
+
+        targetContainerFinalZ.style.width = `${this.size}px`
+        targetZombie.style.width = `${this.size}px`
+
+        let zombieGif = setInterval(()=>{
+            if(imageRotate == 0){
+                targetZombie.src = '/images/zombie/z-1.png';
+            } else if(imageRotate == 1) {
+                targetZombie.src = '/images/zombie/z-2.png';
+            } else if(imageRotate == 2) {
+                targetZombie.src = '/images/zombie/z-3.png';
+            } else if(imageRotate == 3) {
+                targetZombie.src = '/images/zombie/z-4.png';
+                clearInterval(zombieGif);
+            }
+            targetZombie.style.width = `${this.size}px`
+
+            imageRotate++;
+        },100)
+        // targetContainer.style.height = `${this.size * 2}px`;
+        // targetContainer.style.width = `${this.size}px`;
         targetContainer.style.right = `${randomWidth}%`;
         targetContainer.style.top = `${randomHeight}%`;
         
-        targetNode.style.height = `${this.size * 2}px`;
-        targetNode.style.width = `${this.size}px`;
+        // targetNode.style.height = `${this.size * 2}px`;
+        // targetNode.style.width = `${this.size}px`;
         targetNode.style.marginTop = 0;
         
         // Moves target when after specific amount of seconds
@@ -134,13 +160,16 @@ class Target {
 
         // Activates when we click the target
         targetNode.addEventListener('click', function (e) {
-            const endTime = new Date();
+            const endTime = new Date(),
+                hitTarget = document.getElementById('hitTarget'),
+                gun = document.getElementById('gun');
 
             let timeDiff = endTime - startTime,
                 score = storeSpeed - timeDiff;
 
             console.log(`TIME TOOK: ${timeDiff} SCORE: ${score}`)
 
+            hitTarget.play();
             totalScore += score;
             document.getElementById('score').innerHTML = totalScore;
             document.getElementById('pointsSend').value = totalScore;
@@ -148,13 +177,17 @@ class Target {
             //CLEAR THE GAME AREA   
             //gameContainer.innerHTML = '';
             //targetNode.style.height = '0px'
-            targetContainer.remove();
-            targetClicks++;
+            //this.src = '';
+            targetZombie.src = '/images/zombie/explosion.png';
 
-            //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
-            console.log(storeSize);
-            clearTimeout(moveTimer);
-            createTarget(storeSize,storeSpeed);
+            setTimeout(()=>{
+                targetContainer.remove();
+                targetClicks++;
+                gun.src = '/images/gun.png';
+                //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
+                clearTimeout(moveTimer);
+                createTarget(storeSize,storeSpeed);
+            },100)
         });
     }
 }

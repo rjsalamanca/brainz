@@ -23,29 +23,26 @@ ${!firstPlay ?
     </div>
 
 `: ``}
-
-<style>
-    #gameContainer{
-        border:1px solid red;
-    }
-    #target{
-        border:1px solid blue;
-    }
-</style>
-
+<section id='gameInfo'>
+        <p>Time Left: <span id='timeLeft'>60</span></p>
+        <p>Score: <span id='score'>0</span></p>
+        <p>Accuracy: <span id='accuracy'>0.00</span>%</p>
+</section>
 <div id='gameContainer'>
+    <div class='night'></div>
     <div id='game'>
         <div id='startCountDown'>Starting in: <br/><span id='startCountDownNumber'>3</span></div>
+        <div class='weapon'><img id='gun' src='/images/gun.png'/></div>
     </div>
 </div>
-<br/>
-<section>
-    Time Left: <span id='timeLeft'>60</span><br/><br/>
-    Score: <span id='score'>0</span><br/>
-    Accuracy: <span id='accuracy'>0.00</span>%
-</section><br/><br/>
 
-<button type='button' onclick="gameStart('${gameMode.mode}','${gameMode.difficulty}')">START GAME</button>
+<audio id="hitTarget">
+    <source src="/sounds/hit.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<button id='gameStart' class='btn btn-primary btn-lg btn-block' type='button' onclick="gameStart('${gameMode.mode}','${gameMode.difficulty}')">Shoot 'Em Up</button>
+
 <form id='gameInfo' action='/games/${gameMode.mode}/${gameMode.difficulty}'method='POST'>
     <input type="hidden" id='accuracySend' name='accuracy' value=''>
     <input type="hidden" id='pointsSend' name='points' value=''>
