@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
 
+
+
 const Users = require('../models/users.js');
 
 router.use(bodyParser.urlencoded({extended: false}));
@@ -97,23 +99,31 @@ router.post('/add-user', (req,res) =>{
           db.none('INSERT INTO users(email, password, f_name, l_name) VALUES($1,$2,$3,$4)',[email,hash,f_name,l_name])
           .then(() => {
             console.log('SUCCESS')
-            res.render('template', { 
-              locals:{
-                isLoggedIn: req.session.loggedIn,
-                title: 'Login',
-                createdUserAlready: false,
-                passwordCheck: false,
-                newUser: true,
-                noUser: false
-              },
-              partials: {
-                partial:'partial-login'
-              }
-            });
+            // res.redirect('/users/login')
+            
+            
+            req.session.newUser = true;
+            // res.redirect('/users/login')
+            
+
+            // res.render('template', { 
+            //   locals:{
+            //     isLoggedIn: req.session.loggedIn,
+            //     title: 'Login',
+            //     createdUserAlready: false,
+            //     passwordCheck: false,
+            //     newUser: true,
+            //     noUser: false
+            //   },
+            //   partials: {
+            //     partial:'partial-login'
+            //   }
+            // });
             // res.redirect('/users/login');
         });
         }
       })
+      res.redirect('/users/login');
     };
   });
 
@@ -144,23 +154,19 @@ router.post('/login', (req,res) =>{
           req.session.user = {id: user.id, email: user.email, f_name: user.f_name}
           console.log('we logged in with: ', req.session.user)
 
-          res.render('template', { 
-            locals:{
-              isLoggedIn: req.session.loggedIn,
-              title: 'User Page',
-              welcome: `Hello ${user.f_name}`
-            },
-            partials: {
-              partial:'partial-users'
-            }
-          });
-          // if(req.session){
-          //   req.session.loggedIn = true;
-          //   req.session.user = {id: user.id, email: user.email}
-          //   console.log(req.session.user)
-          // };
-          // console.log('success')
-        } else {
+          res.redirect('/users')
+
+          // res.render('template', { 
+          //   locals:{
+          //     isLoggedIn: req.session.loggedIn,
+          //     title: 'User Page',
+          //     welcome: `Hello ${user.f_name}`
+          //   },
+          //   partials: {
+          //     partial:'partial-users'
+          //   }
+          // });
+        } else{
           res.render('template', { 
             locals:{
               isLoggedIn: req.session.loggedIn,
