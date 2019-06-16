@@ -16,8 +16,8 @@ document.body.addEventListener('click', function(){
         clicks++;
 
         let gun = document.getElementById('gun');
-        gun.src = '/images/gun-shot.png';
-        setTimeout(()=>{gun.src = '/images/gun.png'},100)
+        gun.src = '/images/gun-shotv2.png';
+        setTimeout(()=>{gun.src = '/images/gunv2.png'},100)
 
     }
 });
@@ -45,7 +45,7 @@ async function gameStart(mode,difficulty) {
         let gameTimer = setInterval(() => {
             seconds++
             // CHANGE THIS SO GAME RUNS QUICKER
-            if (seconds == 500000) {
+            if (seconds == 60) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
@@ -61,10 +61,10 @@ async function gameStart(mode,difficulty) {
 
         if(difficulty == 'easy'){
             console.log('ez')
-            createTarget(75,100000000);
+            createTarget(75,3000);
         } else if(difficulty == 'medium') {
             console.log('med')
-            createTarget(40,2000);
+            createTarget(40,1500);
         } else if(difficulty == 'hard'){
             console.log('hard')
             createTarget(25,1000);
@@ -183,7 +183,7 @@ class Target {
             setTimeout(()=>{
                 targetContainer.remove();
                 targetClicks++;
-                gun.src = '/images/gun.png';
+                gun.src = '/images/gunv2.png';
                 //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
                 clearTimeout(moveTimer);
                 createTarget(storeSize,storeSpeed);
