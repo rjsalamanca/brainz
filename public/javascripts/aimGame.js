@@ -49,11 +49,9 @@ async function gameStart(mode,difficulty) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
-                document.getElementById('target').remove();
-
                 // SUBMIT FORM WHEN DONE
-                document.getElementById('gameInfo').submit()
-
+                document.getElementById('gameInfo').submit();
+                document.getElementById('target').remove();
             } else {
                 timerContainer.innerHTML = 60 - seconds;
             }

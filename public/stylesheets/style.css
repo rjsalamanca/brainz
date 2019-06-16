@@ -48,11 +48,15 @@ body{
   opacity: 0;
 }
 
+#gameContainer{
+  min-height:200px;
+}
+
 #gameContainer:hover{
   cursor: url(../images/white_crosshair.png)10 10, auto;
 }
 
-#gameInfo {
+#gameStats {
   display:flex;
   justify-content: space-between;
   font-family: 'Teko', sans-serif;
@@ -60,20 +64,22 @@ body{
   padding:10px;
 }
 
-#gameInfo p{
+#gameStats p{
   padding:0;
   margin:0;
 }
 
 .night{
-  height:175px;
+  height:10%;
+  min-height:75px;
   background: url(../images/backgroundv2.jpg);
   background-size: auto 100%;
 }
 
 #game {
-  width:100%;
+  min-height:250px;
   height:50%;
+  width:100%;
   position:relative;
   display:flex;
   background-color: #39422d;

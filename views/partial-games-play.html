@@ -23,7 +23,7 @@ ${!firstPlay ?
     </div>
 
 `: ``}
-<section id='gameInfo'>
+<section id='gameStats'>
         <p>Time Left: <span id='timeLeft'>60</span></p>
         <p>Score: <span id='score'>0</span></p>
         <p>Accuracy: <span id='accuracy'>0.00</span>%</p>
@@ -43,7 +43,7 @@ ${!firstPlay ?
 
 <button id='gameStart' class='btn btn-primary btn-lg btn-block' type='button' onclick="gameStart('${gameMode.mode}','${gameMode.difficulty}')">Shoot 'Em Up</button>
 
-<form id='gameInfo' action='/games/${gameMode.mode}/${gameMode.difficulty}'method='POST'>
+<form id='gameInfo' action='/games/${gameMode.mode}/${gameMode.difficulty}' method='POST'>
     <input type="hidden" id='accuracySend' name='accuracy' value=''>
     <input type="hidden" id='pointsSend' name='points' value=''>
     ${isLoggedIn == true ? `
