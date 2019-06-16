@@ -14,6 +14,11 @@ document.body.addEventListener('click', function(){
         accuracy.innerHTML = calculatedAcc == 'NaN' ? `0.00`:`${calculatedAcc}`;
         document.getElementById('accuracySend').value = accuracy.innerHTML;
         clicks++;
+
+        let gun = document.getElementById('gun');
+        gun.src = '/images/gun-shot.png';
+        setTimeout(()=>{gun.src = '/images/gun.png'},100)
+
     }
 });
 
@@ -156,7 +161,8 @@ class Target {
         // Activates when we click the target
         targetNode.addEventListener('click', function (e) {
             const endTime = new Date(),
-                hitTarget = document.getElementById('hitTarget');
+                hitTarget = document.getElementById('hitTarget'),
+                gun = document.getElementById('gun');
 
             let timeDiff = endTime - startTime,
                 score = storeSpeed - timeDiff;
@@ -171,13 +177,17 @@ class Target {
             //CLEAR THE GAME AREA   
             //gameContainer.innerHTML = '';
             //targetNode.style.height = '0px'
-            targetContainer.remove();
-            targetClicks++;
+            //this.src = '';
+            targetZombie.src = '/images/zombie/explosion.png';
 
-            //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
-            console.log(storeSize);
-            clearTimeout(moveTimer);
-            createTarget(storeSize,storeSpeed);
+            setTimeout(()=>{
+                targetContainer.remove();
+                targetClicks++;
+                gun.src = '/images/gun.png';
+                //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
+                clearTimeout(moveTimer);
+                createTarget(storeSize,storeSpeed);
+            },100)
         });
     }
 }
