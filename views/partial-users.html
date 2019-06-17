@@ -82,5 +82,25 @@
             </tr>`
         ).join('')}
     </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th colspan="4">Average Score</th>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Mode</th>
+                <th scope="row">Points</th>
+                <th scope="row">Accuracy</th>
+            </tr>
+        </thead>
+        ${average.map((averagescore) =>
+            `<tr>
+                <td>${averagescore.difficulty}</td>
+                <td>${parseFloat(averagescore.avg_points).toFixed(2)}</td>
+                <td>${parseFloat(averagescore.avg_accuracy).toFixed(2)}</td>
+            </tr>`
+        ).join('')}
+    </table>
 </section>
 
