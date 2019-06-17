@@ -257,10 +257,19 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   position: absolute;
 }
 
+.start img:hover{
+  /* background-color: rgba(233, 153, 4, 0.753); */
+  transition: width 0.5s;
+  width: 35%;
+}
+
 .start img{
   width: 30%;
   height: 30%;
   min-width: 25%;
+  padding: 5px;
+  border-radius: 10px;
+  transition: width 0.5s;
 }    
 
 @media screen and (max-width: 420px){
@@ -275,13 +284,59 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   }
 }
 
-@media screen and (min-width: 641px){
+.instructions{
+  margin-top: 9.5rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: absolute;
+}
 
+.instructions img:hover{
+  /* background-color: rgba(233, 153, 4, 0.753); */
+  transition: width 0.5s;
+  width: 35%;
+}
+
+.instructions img{
+  width: 30%;
+  height: 30%;
+  min-width: 25%;
+  padding: 5px;
+  border-radius: 10px;
+  transition: width 0.5s;
+}
+
+@media screen and (min-width: 641px){
   .homePage{
     width: 30rem;
     margin-bottom: 15rem;
   }
+
   .start img{
+    width: 8rem;
+    margin-top: 9rem;
+    border: solid green;
+    transition: width 0.5s;
+  }
+
+  .start img:hover{
+    /* background-color: rgba(233, 153, 4, 0.753); */
+    transition: width 0.5s;
+    width: 10rem;
+    border: solid blue;
+  }
+
+
+  .instructions img:hover{
+    /* background-color: rgba(233, 153, 4, 0.753); */
+    transition: width 0.5s;
+    width: 10rem;
+  }
+  
+  .instructions img{
     width: 8rem;
     margin-top: 9rem;
   }
@@ -290,10 +345,29 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 @media screen and (min-width: 821px){
   .homePage{
     width: 40rem;
-    margin-bottom: 10rem;
+    margin-bottom: 13rem;
+  }
+
+  .instructions img:hover{
+    /* background-color: rgba(233, 153, 4, 0.753); */
+    transition: width 0.5s;
+    width: 12rem;
+  }
+
+  .instructions img{
+    width: 10rem;
+    margin-top: 20rem;
+  }
+
+  .start img:hover{
+    /* background-color: rgba(233, 153, 4, 0.753); */
+    transition: width 0.5s;
+    width: 12rem;
+    border: solid orange;
   }
   .start img{
     width: 10rem;
-    margin-top: 20rem;
+    margin-top: 17rem;
+    border: solid red;
   }
 } 
