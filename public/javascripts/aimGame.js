@@ -18,7 +18,6 @@ document.body.addEventListener('click', function(){
         let gun = document.getElementById('gun');
         gun.src = '/images/gun-shotv2.png';
         setTimeout(()=>{gun.src = '/images/gunv2.png'},100)
-
     }
 });
 
@@ -45,7 +44,7 @@ async function gameStart(mode,difficulty) {
         let gameTimer = setInterval(() => {
             seconds++
             // CHANGE THIS SO GAME RUNS QUICKER
-            if (seconds == 60) {
+            if (seconds == 30) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
@@ -53,7 +52,7 @@ async function gameStart(mode,difficulty) {
                 document.getElementById('gameInfo').submit();
                 document.getElementById('target').remove();
             } else {
-                timerContainer.innerHTML = 60 - seconds;
+                timerContainer.innerHTML = 30 - seconds;
             }
         }, 1000)
 
@@ -81,7 +80,7 @@ async function startTime() {
     countDownContainer.style.visibility = 'visible';
     countDownNumber.innerHTML = time;
 
-    while (time > 2) {
+    while (time > 0) {
         await wait1s(1000);
         time--;
         console.log(`Starting in: ${time}`);
