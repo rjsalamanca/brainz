@@ -31,7 +31,8 @@ exports.games_mode_difficulty_get = async (req,res) => {
     const { mode, difficulty} = req.params;
     const gameInstance = new Games(mode,difficulty);
     const getGameMode = await gameInstance.isGameMode();
-    
+    console.log('checking login' ,req.session.loggedIn)
+
     if(typeof getGameMode === 'object'){
         res.render('template', 
         { 
