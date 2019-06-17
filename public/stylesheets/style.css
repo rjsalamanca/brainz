@@ -74,9 +74,12 @@ body{
   min-height:75px;
   background: url(../images/backgroundv2.jpg);
   background-size: auto 100%;
+  border-radius: 10px 10px 0 0;
+
 }
 
 #game {
+  border-radius: 0 0 10px 10px;
   min-height:250px;
   height:50%;
   width:100%;
@@ -136,7 +139,8 @@ body{
 }
 
 #gameStart{
-  margin-top:20px;
+  max-width:300px;
+  margin: 20px auto;
 }
 
 /***************
@@ -230,7 +234,6 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   height: 100vh;
 }
 
-
 .Second {
   display: table-cell;
   background-color: rgb(20, 20, 20);
@@ -258,6 +261,18 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   width: 30%;
   height: 30%;
   min-width: 25%;
+}    
+
+@media screen and (max-width: 420px){
+  #gameStats{
+      font-size:1.3em;
+  }
+}
+
+@media screen and (max-width: 580px){
+  #gameStats{
+      font-size:1.3em;
+  }
 }
 
 @media screen and (min-width: 641px){

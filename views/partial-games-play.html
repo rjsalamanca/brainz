@@ -49,26 +49,17 @@ ${!firstPlay ?
     <input type="hidden" id='gameModeIDSend' name='gameModeId' value='${gameMode.id}'>
 </form>
 
-<!-- @media screen and (min-width: 641px){
+<style>
+    #mainContentContainer{
+        max-width:1200px;
+        margin:0 auto;
+    }
 
-    .homePage{
-      width: 30rem;
-      margin-bottom: 15rem;
+    @media screen and (max-width: 420px){
+        #mainContentContainer{
+            padding:10px;
+        }
     }
-    .start img{
-      width: 8rem;
-      margin-top: 9rem;
-    }
-  }
-  
-  @media screen and (min-width: 821px){
-    .homePage{
-      width: 40rem;
-      margin-bottom: 10rem;
-    }
-    .start img{
-      width: 10rem;
-      margin-top: 20rem;
-    }
-  }  -->
+</style>
+
 <script type="text/javascript" src="/javascripts/aimGame.js"></script>
