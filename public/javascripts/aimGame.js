@@ -15,7 +15,12 @@ document.body.addEventListener('click', function(){
         document.getElementById('accuracySend').value = accuracy.innerHTML;
         clicks++;
 
-        let gun = document.getElementById('gun');
+        let gun = document.getElementById('gun'),
+            randomShot = Math.floor(Math.random() * 4) + 1,
+            shotAudio = new Audio(`/sounds/gun-sound-${randomShot}.mp3`);
+        
+        shotAudio.play();
+
         gun.src = '/images/gun-shotv2.png';
         setTimeout(()=>{gun.src = '/images/gunv2.png'},100)
     }
@@ -158,14 +163,15 @@ class Target {
         // Activates when we click the target
         targetNode.addEventListener('click', function (e) {
             const endTime = new Date(),
-                hitTarget = document.getElementById('hitTarget'),
+                hitTarget = new Audio('/sounds/hit.mp3'),
                 gun = document.getElementById('gun');
 
             let timeDiff = endTime - startTime,
                 score = storeSpeed - timeDiff;
 
+        
             console.log(`TIME TOOK: ${timeDiff} SCORE: ${score}`)
-
+            
             hitTarget.play();
             totalScore += score;
             document.getElementById('score').innerHTML = totalScore;

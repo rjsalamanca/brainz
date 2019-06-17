@@ -50,7 +50,8 @@ exports.games_mode_difficulty_get = async (req,res) => {
         res.render('template', 
         { 
             locals:{
-                title: 'Choose a Proper Game Mode'
+                title: 'Choose a Proper Game Mode',
+                isLoggedIn: req.session.loggedIn
             },
             partials: {
                 partial:'partial-games'
