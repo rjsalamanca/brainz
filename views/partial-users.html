@@ -1,25 +1,25 @@
 <h3>${welcome}</h3>
 
 <section class="section">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th colspan="4">Top 10 Easy Scores</th>
-            </tr>
-            <tr class="table-dark">
-                <th scope="row">Rank</th>
-                <th scope="row">Points</th>
-                <th scope="row">Accuracy</th>
-            </tr>
-        </thead>
-        ${easy.map((easyscore,ind) => 
-            `<tr>
-                <td>${ind+1}</td>
-                <td>${easyscore.points}</td>
-                <td>${easyscore.accuracy}</td>
-            </tr>`
-        ).join('')}
-    </table>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th colspan="4">Top 10 Easy Scores</th>
+                </tr>
+                <tr class="table-dark">
+                    <th scope="row">Rank</th>
+                    <th scope="row">Points</th>
+                    <th scope="row">Accuracy</th>
+                </tr>
+            </thead>
+            ${easy.map((easyscore,ind) => 
+                `<tr>
+                    <td>${ind+1}</td>
+                    <td>${easyscore.points}</td>
+                    <td>${easyscore.accuracy}</td>
+                </tr>`
+            ).join('')}
+        </table>
 
     <table class="table table-hover">
         <thead>
@@ -79,6 +79,26 @@
                 <td>${recentscore.points}</td>
                 <td>${recentscore.accuracy}</td>
                 <td>${recentscore.difficulty}</td>
+            </tr>`
+        ).join('')}
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th colspan="4">Average Score</th>
+            </tr>
+            <tr class="table-dark">
+                <th scope="row">Mode</th>
+                <th scope="row">Points</th>
+                <th scope="row">Accuracy</th>
+            </tr>
+        </thead>
+        ${average.map((averagescore) =>
+            `<tr>
+                <td>${averagescore.difficulty}</td>
+                <td>${parseFloat(averagescore.avg_points).toFixed(2)}</td>
+                <td>${parseFloat(averagescore.avg_accuracy).toFixed(2)}</td>
             </tr>`
         ).join('')}
     </table>
