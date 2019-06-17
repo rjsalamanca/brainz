@@ -286,7 +286,7 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 
 .instructions{
   margin-top: 9.5rem;
-  z-index: 5;
+  z-index: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -318,7 +318,6 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   .start img{
     width: 8rem;
     margin-top: 9rem;
-    border: solid green;
     transition: width 0.5s;
   }
 
@@ -326,7 +325,7 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
     /* background-color: rgba(233, 153, 4, 0.753); */
     transition: width 0.5s;
     width: 10rem;
-    border: solid blue;
+  
   }
 
 
@@ -363,11 +362,15 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
     /* background-color: rgba(233, 153, 4, 0.753); */
     transition: width 0.5s;
     width: 12rem;
-    border: solid orange;
+
   }
   .start img{
     width: 10rem;
     margin-top: 17rem;
-    border: solid red;
+
   }
 } 
+
+section{
+  scroll-behavior: smooth;
+}
