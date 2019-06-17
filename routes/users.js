@@ -53,7 +53,7 @@ router.get('/login', (req,res) => {
       title: 'Login',
       passwordCheck: false,
       createdUserAlready: false,
-      newUser: false,
+      newUser: req.session.newUser,
       noUser: false
     },
     partials: {
@@ -99,38 +99,15 @@ router.post('/add-user', (req,res) =>{
           db.none('INSERT INTO users(email, password, f_name, l_name) VALUES($1,$2,$3,$4)',[email,hash,f_name,l_name])
           .then(() => {
             console.log('SUCCESS')
-            // res.redirect('/users/login')
-            
-            
-            req.session.newUser = true;
-            // res.redirect('/users/login')
-            
 
-            // res.render('template', { 
-            //   locals:{
-            //     isLoggedIn: req.session.loggedIn,
-            //     title: 'Login',
-            //     createdUserAlready: false,
-            //     passwordCheck: false,
-            //     newUser: true,
-            //     noUser: false
-            //   },
-            //   partials: {
-            //     partial:'partial-login'
-            //   }
-            // });
-            // res.redirect('/users/login');
+            req.session.newUser = true
+            res.redirect('/users/login')
         });
         }
       })
-      res.redirect('/users/login');
+      // res.redirect('/users/login');
     };
   });
-
-  // if(req.session){
-  //     req.session.email = email;
-  //     req.session.password = password;
-  // };
 
   console.log(f_name);
   console.log(l_name);
@@ -154,18 +131,9 @@ router.post('/login', (req,res) =>{
           req.session.user = {id: user.id, email: user.email, f_name: user.f_name}
           console.log('we logged in with: ', req.session.user)
 
+          // req.session.welcome = true
           res.redirect('/users')
 
-          // res.render('template', { 
-          //   locals:{
-          //     isLoggedIn: req.session.loggedIn,
-          //     title: 'User Page',
-          //     welcome: `Hello ${user.f_name}`
-          //   },
-          //   partials: {
-          //     partial:'partial-users'
-          //   }
-          // });
         } else{
           res.render('template', { 
             locals:{
