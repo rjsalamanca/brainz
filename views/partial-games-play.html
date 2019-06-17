@@ -24,9 +24,9 @@ ${!firstPlay ?
 
 `: ``}
 <section id='gameStats'>
-        <p>Time Left: <span id='timeLeft'>30</span></p>
-        <p>Score: <span id='score'>0</span></p>
-        <p>Accuracy: <span id='accuracy'>0.00</span>%</p>
+    <p>Time Left: <span id='timeLeft'>30</span></p>
+    <p>Score: <span id='score'>0</span></p>
+    <p>Accuracy: <span id='accuracy'>0.00</span>%</p>
 </section>
 <div id='gameContainer'>
     <div class='night'></div>
@@ -48,4 +48,27 @@ ${!firstPlay ?
     `}
     <input type="hidden" id='gameModeIDSend' name='gameModeId' value='${gameMode.id}'>
 </form>
+
+@media screen and (min-width: 641px){
+
+    .homePage{
+      width: 30rem;
+      margin-bottom: 15rem;
+    }
+    .start img{
+      width: 8rem;
+      margin-top: 9rem;
+    }
+  }
+  
+  @media screen and (min-width: 821px){
+    .homePage{
+      width: 40rem;
+      margin-bottom: 10rem;
+    }
+    .start img{
+      width: 10rem;
+      margin-top: 20rem;
+    }
+  } 
 <script type="text/javascript" src="/javascripts/aimGame.js"></script>

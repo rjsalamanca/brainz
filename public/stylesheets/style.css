@@ -208,3 +208,12 @@ input[type="radio"][value="apocalypse"], input[type="radio"][value="apocalypse"]
 a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   cursor:url(../images/zombie-cursor-sized.png), auto;
 }
+
+.loginSignUpContainer{
+  max-width: 30rem;
+  margin:0 auto;
+}
+
+.innerLoginSignUpContainer{
+  padding:20px;
+}

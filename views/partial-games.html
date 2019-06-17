@@ -1,11 +1,30 @@
+<style>
+    .gameSelectionButton{
+        position:relative;
+    }
+    .videoContainer{
+        width:100%;
+    }
+</style>
+
 <form action='/games' method='POST' class='gamesSelectionForm'>
     <h5>Choose Your Game Mode:</h5>
     <div class="gameModeSelection btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-secondary">
-            <input type="radio" name='mode' value='regular' checked autocomplete="off"> <img class='modeGifs' src='/images/regularMode.gif'/>
+        <label class="btn btn-secondary gameSelectionButton">
+            <input type="radio" name='mode' value='regular' checked autocomplete="off">
+            Regular
+            <video class='videoContainer' autoplay loop>
+                <source class='gameSelectionVideo' src="/videos/regular.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </label>
-        <label class="btn btn-secondary">
-            <input type="radio" name='mode' value='flick' autocomplete="off"> Flick
+        <label class="btn btn-secondary gameSelectionButton">
+            <input type="radio" name='mode' value='flick' autocomplete="off"> 
+            Flick
+            <video class='videoContainer' autoplay loop>
+                <source class='gameSelectionVideo' src="/videos/flick.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </label>
     </div>
     <h5>Choose Your difficulty:</h5>

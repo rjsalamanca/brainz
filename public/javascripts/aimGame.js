@@ -32,7 +32,7 @@ async function gameStart(mode,difficulty) {
     let seconds = 0;
 
     // RESET
-    timerContainer.innerHTML = 60;
+    timerContainer.innerHTML = 30;
     document.getElementById('score').innerHTML = 0;
     document.getElementById('accuracy').innerHTML = '0.00%';
     document.getElementById('accuracySend').value = 0.00;
