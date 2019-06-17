@@ -14,6 +14,11 @@ document.body.addEventListener('click', function(){
         accuracy.innerHTML = calculatedAcc == 'NaN' ? `0.00`:`${calculatedAcc}`;
         document.getElementById('accuracySend').value = accuracy.innerHTML;
         clicks++;
+
+        let gun = document.getElementById('gun');
+        gun.src = '/images/gun-shotv2.png';
+        setTimeout(()=>{gun.src = '/images/gunv2.png'},100)
+
     }
 });
 
@@ -37,18 +42,16 @@ async function gameStart(mode,difficulty) {
         gameRunning = true;
         await startTime();
 
-
         let gameTimer = setInterval(() => {
             seconds++
+            // CHANGE THIS SO GAME RUNS QUICKER
             if (seconds == 60) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
-                document.getElementById('target').remove();
-
                 // SUBMIT FORM WHEN DONE
-                document.getElementById('gameInfo').submit()
-
+                document.getElementById('gameInfo').submit();
+                document.getElementById('target').remove();
             } else {
                 timerContainer.innerHTML = 60 - seconds;
             }
@@ -59,13 +62,13 @@ async function gameStart(mode,difficulty) {
             createTarget(75,3000);
         } else if(difficulty == 'medium') {
             console.log('med')
-            createTarget(40,2000);
+            createTarget(40,1500);
         } else if(difficulty == 'hard'){
             console.log('hard')
             createTarget(25,1000);
         }else if(difficulty == 'apocalypse'){
             console.log('apocalypse')
-            createTarget(10,200);
+            createTarget(50,400);
         }
     }
 }
@@ -78,7 +81,7 @@ async function startTime() {
     countDownContainer.style.visibility = 'visible';
     countDownNumber.innerHTML = time;
 
-    while (time > 0) {
+    while (time > 2) {
         await wait1s(1000);
         time--;
         console.log(`Starting in: ${time}`);
@@ -102,39 +105,69 @@ class Target {
     }
 
     async populate() {
-        gameContainer.innerHTML += `<div id='target'></div>`;
+        gameContainer.innerHTML += `<div id='targetContainer'><img id='lastZ' src='/images/zombie/z-4.png'/><div id='target'><img id='zombieImg' src='/images/zombie/z-1.png'/></div></div>`;
 
-        const targetNode = document.getElementById('target'),
+        const targetContainer = document.getElementById('targetContainer'),
+            targetContainerFinalZ = document.getElementById('lastZ'),
+            targetNode = document.getElementById('target'),
+            targetZombie = document.getElementById('zombieImg'),
             storeSize = this.size,
             storeSpeed = this.speed,
-            startTime = new Date(),
-            randomHeight = Math.floor(Math.random() * 100) + 1,
-            randomWidth = Math.floor(Math.random() * 100) + 1;
+            startTime = new Date();
 
-        target.style.height = `${this.size * 2}px`;
-        target.style.width = `${this.size}px`;
-        target.style.right = `${randomWidth}%`;
-        target.style.top = `${randomHeight}%`;
+        let randomHeight = Math.floor(Math.random() * (100-(((this.size*2)/gameContainer.scrollHeight)*100)) ) + 1,
+            randomWidth = Math.floor(Math.random() * (100-(((this.size)/gameContainer.scrollWidth)*100)) ) + 1,
+            imageRotate = 0;
+
+        targetContainerFinalZ.style.width = `${this.size}px`
+        targetZombie.style.width = `${this.size}px`
+
+        let zombieGif = setInterval(()=>{
+            if(imageRotate == 0){
+                targetZombie.src = '/images/zombie/z-1.png';
+            } else if(imageRotate == 1) {
+                targetZombie.src = '/images/zombie/z-2.png';
+            } else if(imageRotate == 2) {
+                targetZombie.src = '/images/zombie/z-3.png';
+            } else if(imageRotate == 3) {
+                targetZombie.src = '/images/zombie/z-4.png';
+                clearInterval(zombieGif);
+            }
+            targetZombie.style.width = `${this.size}px`
+
+            imageRotate++;
+        },100)
+        // targetContainer.style.height = `${this.size * 2}px`;
+        // targetContainer.style.width = `${this.size}px`;
+        targetContainer.style.right = `${randomWidth}%`;
+        targetContainer.style.top = `${randomHeight}%`;
+        
+        // targetNode.style.height = `${this.size * 2}px`;
+        // targetNode.style.width = `${this.size}px`;
+        targetNode.style.marginTop = 0;
         
         // Moves target when after specific amount of seconds
         moveTimer = setTimeout((res) => {
             if (target) {
                 console.log('Moving Target')               
-                targetNode.remove();
+                targetContainer.remove();
                 clearTimeout(moveTimer);
                 createTarget(this.size,this.speed);
             }
         }, this.speed);
 
         // Activates when we click the target
-        target.addEventListener('click', function (e) {
-            const endTime = new Date();
+        targetNode.addEventListener('click', function (e) {
+            const endTime = new Date(),
+                hitTarget = document.getElementById('hitTarget'),
+                gun = document.getElementById('gun');
 
             let timeDiff = endTime - startTime,
                 score = storeSpeed - timeDiff;
 
             console.log(`TIME TOOK: ${timeDiff} SCORE: ${score}`)
 
+            hitTarget.play();
             totalScore += score;
             document.getElementById('score').innerHTML = totalScore;
             document.getElementById('pointsSend').value = totalScore;
@@ -142,13 +175,17 @@ class Target {
             //CLEAR THE GAME AREA   
             //gameContainer.innerHTML = '';
             //targetNode.style.height = '0px'
-            targetNode.remove();
-            targetClicks++;
+            //this.src = '';
+            targetZombie.src = '/images/zombie/explosion.png';
 
-            //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
-            console.log(storeSize);
-            clearTimeout(moveTimer);
-            createTarget(storeSize,storeSpeed);
+            setTimeout(()=>{
+                targetContainer.remove();
+                targetClicks++;
+                gun.src = '/images/gunv2.png';
+                //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
+                clearTimeout(moveTimer);
+                createTarget(storeSize,storeSpeed);
+            },100)
         });
     }
 }

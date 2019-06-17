@@ -1,12 +1,32 @@
-game partial
-<br><br>
-<form action='/games' method='POST' class='form'>
-    <input type="radio" name="mode" value="regular" checked> regular
-    <input type="radio" name="mode" value="flick"> flick<br><br>
+<form action='/games' method='POST' class='gamesSelectionForm'>
+    <h5>Choose Your Game Mode:</h5>
+    <div class="gameModeSelection btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+            <input type="radio" name='mode' value='regular' checked autocomplete="off"> Regular
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name='mode' value='flick' autocomplete="off"> Flick
+        </label>
+    </div>
+    <h5>Choose Your difficulty:</h5>
 
-    <input type="radio" name="difficulty" value="easy" checked> easy
-    <input type="radio" name="difficulty" value="medium"> medium
-    <input type="radio" name="difficulty" value="hard"> hard <br><br>
-    <button type='submit' class='btn btn-secondary'>Login</button>
+    <div class="gameDifficultySelection btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary btn-lg btn-block">
+            <input type="radio" name="difficulty" value="easy" checked autocomplete="off"> Easy
+        </label>
+        <label class="btn btn-secondary btn-lg btn-block">
+            <input type="radio" name="difficulty" value="medium" autocomplete="off"> Medium
+        </label>
+        <label class="btn btn-secondary btn-lg btn-block">
+            <input type="radio" name="difficulty" value="hard" autocomplete="off"> Hard
+        </label>
+    </div>
+
+    <button type='submit' class='btn btn-primary btn-lg btn-block'>Kill Zombies</button>
+
+    <br><br><br>
+
+    <label class="btn btn-secondary apocalypse-btn">
+        <input type="radio" name="difficulty" value="apocalypse" autocomplete="off"> Apocalypse
+    </label>
 </form>
-

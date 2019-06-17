@@ -1,11 +1,5 @@
 ${!firstPlay ? 
 `
-    <script>
-        $(document).ready(function(){
-            $("#scoresModal").modal('show');
-        });
-    </script>
-
     <div class="modal fade" id="scoresModal" tabindex="-1" role="dialog" aria-labelledby="scoresModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -16,7 +10,8 @@ ${!firstPlay ?
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h4>Well Done!</h4>
+                    <h4>Well done ${isLoggedIn ? `${user.f_name}` : `Zombie`}...</h4>
+                    <br/>
                     <p>You got ${previousScore.points} points with ${previousScore.accuracy}% accuracy! </p>
                     <p></p>
                 </div>
@@ -26,25 +21,36 @@ ${!firstPlay ?
             </div>
         </div>
     </div>
+
 `: ``}
-
-<div></div>
-
-<div id='game'>
-    <div id='startCountDown'>Starting in: <br/><span id='startCountDownNumber'>3</span></div>
+<section id='gameStats'>
+        <p>Time Left: <span id='timeLeft'>60</span></p>
+        <p>Score: <span id='score'>0</span></p>
+        <p>Accuracy: <span id='accuracy'>0.00</span>%</p>
+</section>
+<div id='gameContainer'>
+    <div class='night'></div>
+    <div id='game'>
+        <div id='startCountDown'>Starting in: <br/><span id='startCountDownNumber'>3</span></div>
+        <div class='weapon'><img id='gun' src='/images/gunv2.png'/></div>
+    </div>
 </div>
-<br/>
-<section>
-    Time Left: <span id='timeLeft'>60</span><br/><br/>
-    Score: <span id='score'>0</span><br/>
-    Accuracy: <span id='accuracy'>0.00</span>%
-</section><br/><br/>
 
-<button type='button' onclick="gameStart('${gameMode.mode}','${gameMode.difficulty}')">START GAME</button>
-<form id='gameInfo' action='/games/${gameMode.mode}/${gameMode.difficulty}'method='POST'>
+<audio id="hitTarget">
+    <source src="/sounds/hit.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<button id='gameStart' class='btn btn-primary btn-lg btn-block' type='button' onclick="gameStart('${gameMode.mode}','${gameMode.difficulty}')">Shoot 'Em Up</button>
+
+<form id='gameInfo' action='/games/${gameMode.mode}/${gameMode.difficulty}' method='POST'>
     <input type="hidden" id='accuracySend' name='accuracy' value=''>
     <input type="hidden" id='pointsSend' name='points' value=''>
-    <input type="hidden" id='userIDSend' name='userId' value='1'>
+    ${isLoggedIn == true ? `
+        <input type="hidden" id='userIDSend' name='userId' value='${user.id}'>
+    `:`
+        <input type="hidden" id='userIDSend' name='userId' value='1'>
+    `}
     <input type="hidden" id='gameModeIDSend' name='gameModeId' value='${gameMode.id}'>
 </form>
 <script type="text/javascript" src="/javascripts/aimGame.js"></script>
