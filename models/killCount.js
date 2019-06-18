@@ -9,7 +9,8 @@ class Kills{
 
     static async getAllKills(){
         try{
-            const response = db.any(`SELECT kill_count FROM kills`)
+            const response = await db.any(`SELECT kill_count FROM kills`)
+            console.log(response)
             return response;
         } catch(err) {
             return err.message;

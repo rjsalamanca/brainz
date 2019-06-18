@@ -5,6 +5,8 @@ const express = require('express'),
 router.get('/', async (req, res, next) => {
     const getAllKills = await Kills.getAllKills();
     const addedKills = getAllKills.reduce((tot,curr) => tot.kill_count + curr.kill_count);
+    console.log(addedKills)
+
     res.render('template', {
         locals: {
             title: '',
