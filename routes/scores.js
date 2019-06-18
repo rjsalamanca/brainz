@@ -1,7 +1,7 @@
 const express = require('express'),
     router = express.Router(),
     scoresModel = require('../models/scores'),
-    Kills = require('../models/killCount')
+    Kills = require('../models/killCount');
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {

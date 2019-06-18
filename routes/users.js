@@ -123,6 +123,7 @@ router.post('/add-user', (req,res) =>{
           .then(() => {
             console.log('SUCCESS')
             db.one('SELECT id FROM users WHERE email = $1', [email]).then(async (response) => {
+              console.log('creating kills')
               await Kills.createKills(response.id);
             });
             req.session.newUser = true
