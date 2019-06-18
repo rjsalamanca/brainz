@@ -247,11 +247,13 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 .innerLoginSignUpContainer{
   padding:20px;
 }
+
 .First {
   height: 95vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   background-image: url(../images/background1.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -259,34 +261,28 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   height: 100vh;
 }
 
-.Second {
+/* .Second {
   width: 100%;
   height: 100vh;
   display: flex;
-  padding: 10%;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* #howTo{
-  
+#card{
+  margin:5rem;
+  max-width: 50%;
+  font-size: .25rem;
 } */
-
-.video{
-  display: flex;
-}
 
 .homePage{
   width: 15rem;
-  margin-bottom: 10rem;
 }
 
 .start{
-  margin-top: 3rem;
   z-index: 5;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  position: absolute;
+  text-align:center;
+
 }
 
 .start img:hover{
@@ -297,10 +293,8 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 
 .start img{
   width: 30%;
-  height: 30%;
   min-width: 25%;
   padding: 5px;
-  border-radius: 10px;
   transition: width 0.5s;
 }    
 
@@ -344,12 +338,14 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 @media screen and (min-width: 641px){
   .homePage{
     width: 30rem;
-    margin-bottom: 15rem;
+  }
+  .start{
+    text-align:center;
   }
 
   .start img{
+    text-align:center;
     width: 8rem;
-    margin-top: 11rem;
     transition: width 0.5s;
   }
 
@@ -370,12 +366,20 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
     width: 8rem;
     margin-top: 12rem;
   }
+
+  /* #card{
+    margin-left: 20rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    max-width: 50%;
+    font-size: .25rem;
+  
+  } */
 }
 
 @media screen and (min-width: 821px){
   .homePage{
     width: 40rem;
-    margin-bottom: 13rem;
   }
 
   .instructions img:hover{
@@ -392,11 +396,19 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   .start img:hover{
     /* background-color: rgba(233, 153, 4, 0.753); */
     transition: width 0.5s;
-    width: 12rem;
 
   }
   .start img{
     width: 10rem;
-    margin-top: 17rem;
+    text-align:center;
   }
 } 
+
+/* #card{
+  margin-left: 20rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  max-width: 50%;
+  font-size: .25rem;
+
+} */

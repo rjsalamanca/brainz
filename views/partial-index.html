@@ -4,9 +4,14 @@
     padding:0;
 }
 
+
+
+
 .pageTitle{
     display: none;
 }
+
+
 
 html{
     scroll-behavior: smooth;
@@ -15,38 +20,27 @@ html{
 #killCountFrame{
     border:none;
     overflow:hidden;
+    width:100%;
+    height:auto;
+    position: absolute;
 }
 </style>
+<iframe id='killCountFrame' src="/killcount" scrolling='no'></iframe>
 
 <section id ="first" class="First">
         <img class= "homePage" src="/images/home-page.png" />
         <a class='start' href="/games" ><img src="/images/start.gif"/></a>
-        <a class='instructions' href="#second" ><img src="/images/instructions.png"/></a>
-        <iframe id='killCountFrame' src="/killcount" scrolling='no'></iframe>
-
+        <!-- <a class='instructions' href="#second" ><img src="/images/instructions.png"/></a> -->
 </section>
-<h2>How To Survive</h2>
+<!-- <h2>How To Survive</h2>
+
 <section id ="second" class="Second">
-    
-    <div id="howTo" class="card mb-3">
-            <h3 class="card-header">Aiming</h3>
-            <div class="video">
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-body">
-                            <video autoplay>
-                                <source src="/images/aiming.mp4" type="video/mp4"/>
-                            </video>
-                        </div>
-                        </div>
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-body">
-                            <h4 class="card-title">Dark card title</h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                        </div>
+    <div class= "wrapper">
+        <div id= "card" class="card mb-3">
+                <h3 class="card-header">Aiming</h3>
+                <img style= "width: 100%; display: block;" src="/images/aiming.gif" alt="Card image">
                 <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
+                    <p class="card-text">Use trackpad or mouse to move the crosshairs around the screen. The crosshairs will change color from white to red indicating when you are on target and ready to shoot.</p>
         </div>
     </div>
-</section>
+</section> -->
