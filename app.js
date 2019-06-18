@@ -7,9 +7,8 @@ const express = require('express'),
     indexRouter = require('./routes/index'),
     usersRouter = require('./routes/users'),
     gamesRouter = require('./routes/games'),
-    scoresRouter = require('./routes/scores'),
-    killCountRouter = require('./routes/killCount');
-
+    scoresRouter = require('./routes/scores');
+    
 const app = express();
 
 
@@ -29,11 +28,9 @@ app.use(session({
     isLoggedIn: false
 }));
 
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/games',gamesRouter);
 app.use('/scores', scoresRouter);
-app.use('/killCount', killCountRouter)
 
 module.exports = app;
