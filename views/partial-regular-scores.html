@@ -1,67 +1,72 @@
-<section class="section">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th colspan="4">Easy Regular</th>
-            </tr>
-            <tr class="table-dark">
-                <th scope="row">Rank</th>
-                <th scope="row">Name</th>
-                <th scope="row">Points</th>
-                <th scope="row">Accuracy</th>
-            </tr>
-        </thead>
-        ${easy.map((easyscore,ind) => 
-            `<tr>
-                <td>${ind+1}</td>
-                <td>${easyscore.f_name}</td>
-                <td>${easyscore.points}</td>
-                <td>${easyscore.accuracy}</td>
-            </tr>`
-        ).join('')}
-    </table>
+<section class="section user-scores">
+    <div class="card score-info border-secondary mb-3" style="max-width: 25rem;">
+        <table class="table table-hover">
+            <thead>
+                <div class="card-header">
+                    Top 10 Easy Scores
+                </div>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Points</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            ${easy.map((easyscore,ind) => 
+                `<tr>
+                    <td>${ind+1}</td>
+                    <td>${easyscore.f_name}</td>
+                    <td>${easyscore.points}</td>
+                    <td>${easyscore.accuracy}</td>
+                </tr>`
+            ).join('')}
+        </table>
+    </div>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th colspan="4">Medium Regular</th>
-            </tr>
-            <tr class="table-dark">
-                <th scope="row">Rank</th>
-                <th scope="row">Name</th>
-                <th scope="row">Points</th>
-                <th scope="row">Accuracy</th>
-            </tr>
-        </thead>
-        ${med.map((medscore,ind) => 
-            `<tr>
-                <td>${ind+1}</td>
-                <td>${medscore.f_name}</td>
-                <td>${medscore.points}</td>
-                <td>${medscore.accuracy}</td>
-            </tr>`
-        ).join('')}
-    </table>
+    <div class="card score-info border-secondary mb-3" style="max-width: 25rem;">
+        <table class="table table-hover">
+            <thead>
+                <div class="card-header">
+                    Top 10 Medium Scores
+                </div>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Points</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            ${med.map((medscore,ind) => 
+                `<tr>
+                    <td>${ind+1}</td>
+                    <td>${medscore.f_name}</td>
+                    <td>${medscore.points}</td>
+                    <td>${medscore.accuracy}</td>
+                </tr>`
+            ).join('')}
+        </table>
+    </div>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th colspan="4">Hard Regular</th>
-            </tr>
-            <tr class="table-dark">
-                <th scope="row">Rank</th>
-                <th scope="row">Name</th>
-                <th scope="row">Points</th>
-                <th scope="row">Accuracy</th>
-            </tr>
-        </thead>
-        ${hard.map((hardscore,ind) => 
-            `<tr>
-                <td>${ind+1}</td>
-                <td>${hardscore.f_name}</td>
-                <td>${hardscore.points}</td>
-                <td>${hardscore.accuracy}</td>
-            </tr>`
-        ).join('')}
-    </table>
-</section>
+    <div class="card score-info border-secondary mb-3" style="max-width: 25rem;">
+        <table class="table table-hover">
+            <thead>
+                <div class="card-header">
+                    Top 10 Hard Scores
+                </div>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Points</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            ${hard.map((hardscore,ind) => 
+                `<tr>
+                    <td>${ind+1}</td>
+                    <td>${hardscore.f_name}</td>
+                    <td>${hardscore.points}</td>
+                    <td>${hardscore.accuracy}</td>
+                </tr>`
+            ).join('')}
+        </table>
+    </div>
