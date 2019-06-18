@@ -297,7 +297,8 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   min-width: 25%;
   padding: 5px;
   transition: width 0.5s;
-}    
+}   
+
 
 .instructions{
   margin-top: 12.4rem;
@@ -322,6 +323,14 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   border-radius: 10px;
   transition: width 0.5s;
 }
+.table th, .table td{
+  padding: 5px 0;
+}
+
+.quotes{
+  font-size: 1rem;
+}
+
 
 @media screen and (max-width: 420px){
   #gameStats{
@@ -366,6 +375,10 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
     width: 8rem;
     margin-top: 12rem;
   }
+  .quotes{
+    font-size: 2rem;
+  }
+  
 
 }
 
@@ -404,4 +417,8 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   .start{
     margin-bottom: -30rem;
   }
+  .quotes{
+    font-size: 2rem;
+  }
+  
 } 
