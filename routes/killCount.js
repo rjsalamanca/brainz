@@ -3,15 +3,16 @@ const express = require('express'),
     Kills = require('../models/killCount')
 
 router.get('/', async (req, res, next) => {
+    
     const getAllKills = await Kills.getAllKills();
-    const addedKills = getAllKills.reduce((tot,curr) => tot.kill_count + curr.kill_count);
-    console.log(addedKills)
+    let totalKills = 0;
+    getAllKills.forEach(e => { tot += e.kill_count})
 
     res.render('template', {
         locals: {
             title: '',
             isLoggedIn: req.session.loggedIn,
-            allKills: addedKills
+            allKills: totalKills
         },
         partials: {
             partial:'partial-kills'
