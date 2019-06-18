@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
 
     const getAllKills = await Kills.getAllKills();
     let totalKills = 0;
+    console.log(getAllKills);
     getAllKills.forEach(e => { totalKills += e.kill_count})
 
     // const easyFlickScores = await scoresModel.getScores(4);
