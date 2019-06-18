@@ -49,7 +49,7 @@ async function gameStart(mode,difficulty) {
         let gameTimer = setInterval(() => {
             seconds++
             // CHANGE THIS SO GAME RUNS QUICKER
-            if (seconds == 30) {
+            if (seconds == 2) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
@@ -182,10 +182,11 @@ class Target {
             //targetNode.style.height = '0px'
             //this.src = '';
             targetZombie.src = '/images/zombie/explosion.png';
+            targetClicks++;
+            document.getElementById('gameKills').value = targetClicks;
 
             setTimeout(()=>{
                 targetContainer.remove();
-                targetClicks++;
                 gun.src = '/images/gunv2.png';
                 //STOPS CURRENT MOVE TIMER AND CREATE A NEW TARGET.
                 clearTimeout(moveTimer);

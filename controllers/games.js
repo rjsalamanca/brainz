@@ -1,4 +1,5 @@
 const Games = require('../models/games');
+const Kills = require('../models/killCount');
 
 // GETS
 exports.games_get = (req,res) => {
@@ -31,7 +32,6 @@ exports.games_mode_difficulty_get = async (req,res) => {
     const { mode, difficulty} = req.params;
     const gameInstance = new Games(mode,difficulty);
     const getGameMode = await gameInstance.isGameMode();
-    console.log('checking login' ,req.session.loggedIn)
 
     if(typeof getGameMode === 'object'){
         res.render('template', 
@@ -68,12 +68,17 @@ exports.games_post = (req,res) => {
 }
 
 exports.games_mode_difficulty_post = async (req,res) => {
-    const { accuracy, points, userId, gameModeId } = req.body;
+    const { accuracy, points, userId, gameModeId, killCount } = req.body;
     const { gameMode, difficulty } = req.params;
     const gameInstance = new Games(gameMode,difficulty);
     const getGameMode = await gameInstance.isGameMode();
 
+    const killInstance = new Kills(null, null, userId)
+    const getKillCount = await killInstance.checkKillCount();
+
+    await killInstance.addKills(parseInt(getKillCount.kill_count) + parseInt(killCount));
     await Games.addScore(accuracy, points, userId, gameModeId);
+
     res.render('template', 
     { 
         locals:{

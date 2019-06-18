@@ -4,6 +4,7 @@ const db = require('../models/conn.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
+const Kills = require('../models/killCount');
 
 const scoresModel = require('../models/scores.js');
 
@@ -121,7 +122,9 @@ router.post('/add-user', (req,res) =>{
           db.none('INSERT INTO users(email, password, f_name, l_name) VALUES($1,$2,$3,$4)',[email,hash,f_name,l_name])
           .then(() => {
             console.log('SUCCESS')
-
+            db.one('SELECT id FROM users WHERE email = $1', [email]).then(async (response) => {
+              await Kills.createKills(response.id);
+            });
             req.session.newUser = true
             res.redirect('/users/login')
         });
