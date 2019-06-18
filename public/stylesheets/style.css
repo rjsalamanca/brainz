@@ -235,12 +235,21 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 }
 
 .Second {
-  display: table-cell;
-  background-color: rgb(20, 20, 20);
   width: 100%;
   height: 100vh;
-  
+  display: flex;
+  padding: 10%;
 }
+
+/* #howTo{
+  
+} */
+
+.video{
+  display: flex;
+}
+
+
 
 .homePage{
   width: 15rem;
@@ -285,7 +294,7 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 }
 
 .instructions{
-  margin-top: 9.5rem;
+  margin-top: 12.4rem;
   z-index: 0;
   display: flex;
   flex-direction: row;
@@ -317,7 +326,7 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 
   .start img{
     width: 8rem;
-    margin-top: 9rem;
+    margin-top: 11rem;
     transition: width 0.5s;
   }
 
@@ -337,7 +346,7 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   
   .instructions img{
     width: 8rem;
-    margin-top: 9rem;
+    margin-top: 12rem;
   }
 }
 
@@ -370,7 +379,3 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 
   }
 } 
-
-section{
-  scroll-behavior: smooth;
-}
