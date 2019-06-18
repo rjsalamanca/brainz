@@ -20,7 +20,7 @@
     "express-es6-template-engine": "^2.1.9",
     "express-session": "^1.16.2",
     "helmet": "^3.18.0",
-    "http-errors": "~1.6.3",
+    "http-errors": "^1.6.3",
     "mocha": "^6.1.4",
     "morgan": "~1.9.1",
     "passport": "^0.4.0",
