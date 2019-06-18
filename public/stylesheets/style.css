@@ -201,13 +201,28 @@ input[type="radio"][value="apocalypse"], input[type="radio"][value="apocalypse"]
 *              *
 ***************/
 
-.section {
+.user-scores {
   display:flex;
+  justify-content:space-evenly;
+  flex-wrap:wrap;
+  margin-top:5rem;
 }
 
-.table {
-  display:block;
-  border:solid;
+.score-info {
+  flex-grow:1;
+  margin:1%;
+}
+
+.card-header {
+  text-align:center; 
+}
+
+th {
+  text-align:center;
+}
+
+td {
+  text-align:center;
 }
 
 a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {

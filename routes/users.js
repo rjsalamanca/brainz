@@ -7,7 +7,6 @@ const SALT_ROUNDS = 10;
 
 
 
-const Users = require('../models/users.js');
 const scoresModel = require('../models/scores.js');
 
 router.use(bodyParser.urlencoded({extended: false}));
