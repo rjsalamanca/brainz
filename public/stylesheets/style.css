@@ -1,48 +1,60 @@
 body{
   min-width: 320px;
 }
+
 #mainContentContainer {
   padding:20px 50px;
 }
+
 .logo{
   width:80px;
 }
+
 /*****************
 *                *
 *  Start Index   *
 *                *
 *****************/
+
 .container{
   position:relative;
   /* height:200px; */
 }
+
 .noobToPro {
   text-align:center;
   position:absolute;
   width:100%;
 }
+
 .container .col-sm{
   height:200px;
 }
+
 /*****************
 *                *
 *    End Index   *
 *                *
 *****************/
+
 /***************
 *              *
 *  START GAME  *
 *              *
 ***************/
+
 #lastZ {
   opacity: 0;
 }
+
 #gameContainer{
   min-height:200px;
 }
+
 #gameContainer:hover{
   cursor: url(../images/white_crosshair.png)10 10, auto;
 }
+
 #gameStats {
   display:flex;
   justify-content: space-between;
@@ -50,10 +62,12 @@ body{
   font-size:2em;
   padding:10px;
 }
+
 #gameStats p{
   padding:0;
   margin:0;
 }
+
 .night{
   height:10%;
   min-height:75px;
@@ -61,6 +75,7 @@ body{
   background-size: auto 100%;
   border-radius: 10px 10px 0 0;
 }
+
 #game {
   border-radius: 0 0 10px 10px;
   min-height:250px;
@@ -74,12 +89,14 @@ body{
   /* background: url(../images/background.png); */
   background-size:100% auto;
 }
+
 #startCountDown{
   visibility: hidden;
   font-size:3em;
   text-align: center;
   flex-grow:1;
 }
+
 .weapon img{
   width:100px;
   z-index:999;
@@ -89,16 +106,19 @@ body{
   -o-user-drag: none;
   user-select: none;
 }
+
 #targetContainer{
   position:absolute;
   overflow:hidden;
   display:flex;
   align-items:flex-end;
 }
+
 #target{
   background-size: 100% 100%;
   z-index:0;
 }
+
 #zombieImg{
   -webkit-user-drag: none;
   -khtml-user-drag: none;
@@ -106,100 +126,126 @@ body{
   -o-user-drag: none;
   user-select: none;
 }
+
 #zombieImg:hover{
   cursor: url(../images/red_crosshair.png)10 10, auto;
 }
+
 #zombieImg:target{
   cursor: url(../images/clicked.png)10 10, auto;
 }
+
 #gameStart{
   max-width:300px;
   margin: 20px auto;
 }
+
 /***************
 *              *
 *   END GAME   *
 *              *
 ***************/
+
 /*****************
 *                *
 *  Start SELECT  *
 *                *
 *****************/
+
 input[type="radio"][value="apocalypse"], input[type="radio"][value="apocalypse"]:checked{
   display: none;
 }
+
 .gamesSelectionForm{
   width:100%;
   min-width:200px;
   max-width:500px;
   margin:0 auto;
 }
+
 .gamesSelectionForm h5{
   text-align: center;
 }
+
 .gameModeSelection{
   display:flex;
   margin:20px 0;
 }
+
 .gameModeSelection .btn{
   width:50%;
   margin-right:5px;
 }
+
 .gameModeSelection .btn:last-child{
   margin-right:0px;
 }
+
 .gameDifficultySelection{
   margin:10px 0 20px 0;
 }
+
 .apocalypse-btn{
   opacity:0;
 }
+
 .apocalypse-btn:hover{
   opacity:1;
 }
+
 /***************
 *              *
 *  END SELECT  *
 *              *
 ***************/
+
 .user-scores {
   display:flex;
   justify-content:space-evenly;
   flex-wrap:wrap;
 }
+
 .scoresHeader{
   margin: 20px 0 10px;
   text-align:center;
   text-shadow: 0 4px 0 rgba(100,100,100,1), 0 8px 3px rgba(0,0,0,0.7);
 }
+
 .score-info {
   flex-grow:1;
   margin:1%;
 }
+
 .scoreRank {
   font-size: 1.2em;
   font-weight:1000;
 }
+
 .card-header {
   text-align:center; 
 }
+
 th {
   text-align:center;
 }
+
 td {
   text-align:center;
 }
+
 a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   cursor:url(../images/zombie-cursor-sized.png), auto;
 }
+
 .loginSignUpContainer{
   max-width: 30rem;
   margin:0 auto;
 }
+
 .innerLoginSignUpContainer{
   padding:20px;
 }
+
 .First {
   height: 95vh;
   display: flex;
@@ -212,6 +258,7 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   width: 100%;
   height: 100vh;
 }
+
 /* .Second {
   width: 100%;
   height: 100vh;
@@ -229,21 +276,25 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   margin-top: -5rem;
   position: absolute;
 }
+
 .start{
   z-index: 5;
   text-align:center;
   margin-bottom: -10rem;
 }
+
 .start img:hover{
   transition: width 0.5s;
   width: 35%;
 }
+
 .start img{
   width: 30%;
   min-width: 25%;
   padding: 5px;
   transition: width 0.5s;
-}   
+}
+
 @media screen and (max-width: 380px){
   .card tr{
     font-size:0.8em;
@@ -267,6 +318,7 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
       font-size:1.3em;
   }
 }
+
 .instructions{
   margin-top: 12.4rem;
   z-index: 0;
@@ -276,10 +328,12 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   justify-content: center;
   position: absolute;
 }
+
 .instructions img:hover{
   transition: width 0.5s;
   width: 35%;
 }
+
 .instructions img{
   width: 30%;
   height: 30%;
@@ -296,6 +350,17 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 .quotes{
   font-size: 1rem;
 }
+
+.allKills{
+  text-align:center;
+  text-shadow: 0 2px 0 rgba(100,100,100,1), 0 8px 3px rgba(0,0,0,0.7);
+}
+@media screen and (max-width: 400px){
+  .allKills{
+      font-size: 1.2em;
+  }
+}
+
 @media screen and (min-width: 641px){
   .homePage{
     width: 30rem;
@@ -328,6 +393,7 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   }
   
 }
+
 @media screen and (min-width: 821px){
   .homePage{
     width: 40rem;
