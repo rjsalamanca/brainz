@@ -18,3 +18,8 @@ INSERT INTO scores
     (accuracy, points, user_id, game_mode_id)
 VALUES
     (90.3, 100, 1,1);
+
+INSERT INTO kills
+    (kill_count, user_id)
+VALUES
+    (0,1);

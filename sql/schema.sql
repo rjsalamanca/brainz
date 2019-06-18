@@ -21,3 +21,9 @@ CREATE TABLE scores(
     user_id INT REFERENCES users(id),
     game_mode_id INT REFERENCES game_modes(id)
 );
+
+CREATE TABLE kills(
+    id SERIAL PRIMARY KEY,
+    kill_count INT,
+    user_id INT REFERENCES users(id)
+);
