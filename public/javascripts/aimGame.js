@@ -49,7 +49,7 @@ async function gameStart(mode,difficulty) {
         let gameTimer = setInterval(() => {
             seconds++
             // CHANGE THIS SO GAME RUNS QUICKER
-            if (seconds == 2) {
+            if (seconds == 30) {
                 gameRunning = false;
                 clearInterval(gameTimer);
                 clearInterval(moveTimer)
