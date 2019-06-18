@@ -282,7 +282,8 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 .start{
   z-index: 5;
   text-align:center;
-
+  position:absolute;
+  width:100%;
 }
 
 .start img:hover{
@@ -297,18 +298,6 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   padding: 5px;
   transition: width 0.5s;
 }    
-
-@media screen and (max-width: 420px){
-  #gameStats{
-      font-size:1.3em;
-  }
-}
-
-@media screen and (max-width: 580px){
-  #gameStats{
-      font-size:1.3em;
-  }
-}
 
 .instructions{
   margin-top: 12.4rem;
@@ -335,12 +324,21 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   transition: width 0.5s;
 }
 
+@media screen and (max-width: 420px){
+  #gameStats{
+      font-size:1.3em;
+  }
+}
+
+@media screen and (max-width: 580px){
+  #gameStats{
+      font-size:1.3em;
+  }
+}
+
 @media screen and (min-width: 641px){
   .homePage{
     width: 30rem;
-  }
-  .start{
-    text-align:center;
   }
 
   .start img{
@@ -353,7 +351,6 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
     /* background-color: rgba(233, 153, 4, 0.753); */
     transition: width 0.5s;
     width: 10rem;
-  
   }
 
   .instructions img:hover{
@@ -393,14 +390,16 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
     margin-top: 20rem;
   }
 
-  .start img:hover{
-    /* background-color: rgba(233, 153, 4, 0.753); */
-    transition: width 0.5s;
-
-  }
   .start img{
     width: 10rem;
     text-align:center;
+  }
+  
+  .start img:hover{
+    /* background-color: rgba(233, 153, 4, 0.753); */
+    width: 12rem;
+    transition: width 0.5s;
+
   }
 } 
 
