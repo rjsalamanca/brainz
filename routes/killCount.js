@@ -6,7 +6,7 @@ router.get('/', async (req, res, next) => {
     
     const getAllKills = await Kills.getAllKills();
     let totalKills = 0;
-    getAllKills.forEach(e => { tot += e.kill_count})
+    getAllKills.forEach(e => { totalKills += e.kill_count})
 
     res.render('template', {
         locals: {
@@ -37,8 +37,5 @@ router.post('/:totalKills', async (req, res, next) => {
         });
     } res.redirect('/killCount')
 });
-
-
-
 
 module.exports = router;

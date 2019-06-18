@@ -277,17 +277,17 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 
 .homePage{
   width: 15rem;
+  margin-top: -5rem;
+  position: absolute;
 }
 
 .start{
   z-index: 5;
   text-align:center;
-  position:absolute;
-  width:100%;
+  margin-bottom: -10rem;
 }
 
 .start img:hover{
-  /* background-color: rgba(233, 153, 4, 0.753); */
   transition: width 0.5s;
   width: 35%;
 }
@@ -310,7 +310,6 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 }
 
 .instructions img:hover{
-  /* background-color: rgba(233, 153, 4, 0.753); */
   transition: width 0.5s;
   width: 35%;
 }
@@ -340,6 +339,10 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   .homePage{
     width: 30rem;
   }
+  .start{
+    text-align:center;
+    margin-bottom: -23rem;
+  }
 
   .start img{
     text-align:center;
@@ -348,13 +351,13 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   }
 
   .start img:hover{
-    /* background-color: rgba(233, 153, 4, 0.753); */
+
     transition: width 0.5s;
     width: 10rem;
   }
 
   .instructions img:hover{
-    /* background-color: rgba(233, 153, 4, 0.753); */
+
     transition: width 0.5s;
     width: 10rem;
   }
@@ -364,14 +367,6 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
     margin-top: 12rem;
   }
 
-  /* #card{
-    margin-left: 20rem;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-    max-width: 50%;
-    font-size: .25rem;
-  
-  } */
 }
 
 @media screen and (min-width: 821px){
@@ -399,15 +394,14 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
     /* background-color: rgba(233, 153, 4, 0.753); */
     width: 12rem;
     transition: width 0.5s;
+    width:12rem;
 
   }
+  .start img{
+    width: 10rem;
+    text-align:center;
+  }
+  .start{
+    margin-bottom: -30rem;
+  }
 } 
-
-/* #card{
-  margin-left: 20rem;
-  margin-top: 5rem;
-  margin-bottom: 5rem;
-  max-width: 50%;
-  font-size: .25rem;
-
-} */
