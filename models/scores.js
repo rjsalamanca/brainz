@@ -49,7 +49,7 @@ class Scores {
                 left join users as u on s.user_id = u.id
                 left join game_modes as g on g.id = s.game_mode_id
                 where u.id = $1
-                order by id desc limit 10;
+                order by id desc limit 5;
                 `, [uId]);
             return response;
         } catch(err) {
@@ -67,6 +67,7 @@ class Scores {
                 where u.id = $1
                 group by g.id;
                 `, [uId]);
+                // console.log(response);
                 return response;
         } catch(err) {
             return(err.message);

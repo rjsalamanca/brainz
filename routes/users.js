@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
 
-
-
 const scoresModel = require('../models/scores.js');
 
 router.use(bodyParser.urlencoded({extended: false}));
@@ -19,10 +17,24 @@ router.get('/', async (req, res, next) => {
 
   const recentScores = await scoresModel.getRecentScores(req.session.user.id);
   const averageScores = await scoresModel.getAverages(req.session.user.id);
+  
+  const welcome = [`Fear ${req.session.user.f_name}, The Zombie Slayer`, 
+                  `Bow Down to ${req.session.user.f_name}`,
+                  `${req.session.user.f_name} The killer of a million zombies`,
+                  `Oh F*$@ It's ${req.session.user.f_name}`,
+                  `Oh man it's ${req.session.user.f_name} again`,
+                  `Hey ${req.session.user.f_name} don't forget to double tap`,
+                  `${req.session.user.f_name} is training to be the next star of Zombieland`,
+                  `World War Z's got nothing on ${req.session.user.f_name}`,
+                  `Fear the Walking Dead? ${req.session.user.f_name} definately does not.`,
+                  `If ${req.session.user.f_name} was on the walking dead, there wouldn't be any zombies left.`,
+                  `What has the Zombiepocalypse got on ${req.session.user.f_name}?`,
+                  `Hey ${req.session.user.f_name}, how would you kill a zombie with toilet paper?`];
+  
   res.render('template', { 
     locals:{
       isLoggedIn: req.session.loggedIn,
-      welcome: `Hello ${req.session.user.f_name}`,
+      welcome: welcome[Math.floor(Math.random() * welcome.length-1)+1],
       title: 'Users Page',
       easy: easyRegScores,
       med: medRegScores,

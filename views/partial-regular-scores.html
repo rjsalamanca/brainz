@@ -1,9 +1,11 @@
+<h1 class="scoresHeader display-6">Best Undead Slayers:</h1>
+
 <section class="section user-scores">
-    <div class="card score-info border-secondary mb-3" style="max-width: 25rem;">
+    <div class="card border-danger score-info border-secondary mb-3" style="max-width: 25rem;">
         <table class="table table-hover">
             <thead>
                 <div class="card-header">
-                    Top 10 Easy Scores
+                    Top 10 Regular Easy Scores
                 </div>
                 <tr>
                     <th>Rank</th>
@@ -11,10 +13,13 @@
                     <th>Points</th>
                     <th>Accuracy</th>
                 </tr>
-            </thead>
             ${easy.map((easyscore,ind) => 
-                `<tr>
-                    <td>${ind+1}</td>
+                `${ind == 0 ? 
+                `<tr class="text-white" style='background-color:#e74c3c;'>`
+                : ind == 1 ? `<tr class="text-white" style='background-color:#b62616;'>`
+                : ind == 2 ? `<tr class="text-white" style='background-color: #881d11;'>`
+                : ``}
+                    <td class='scoreRank'>${ind+1}</td>
                     <td>${easyscore.f_name}</td>
                     <td>${easyscore.points}</td>
                     <td>${easyscore.accuracy}</td>
@@ -23,11 +28,11 @@
         </table>
     </div>
 
-    <div class="card score-info border-secondary mb-3" style="max-width: 25rem;">
+    <div class="card border-danger score-info border-secondary mb-3" style="max-width: 25rem;">
         <table class="table table-hover">
             <thead>
                 <div class="card-header">
-                    Top 10 Medium Scores
+                    Top 10 Regular Medium Scores
                 </div>
                 <tr>
                     <th>Rank</th>
@@ -37,8 +42,12 @@
                 </tr>
             </thead>
             ${med.map((medscore,ind) => 
-                `<tr>
-                    <td>${ind+1}</td>
+                `${ind == 0 ? 
+                    `<tr class="text-white" style='background-color:#e74c3c;'>`
+                    : ind == 1 ? `<tr class="text-white" style='background-color:#b62616;'>`
+                    : ind == 2 ? `<tr class="text-white" style='background-color: #881d11;'>`
+                    : ``}
+                    <td class='scoreRank'>${ind+1}</td>
                     <td>${medscore.f_name}</td>
                     <td>${medscore.points}</td>
                     <td>${medscore.accuracy}</td>
@@ -47,11 +56,11 @@
         </table>
     </div>
 
-    <div class="card score-info border-secondary mb-3" style="max-width: 25rem;">
+    <div class="card border-danger score-info border-secondary mb-3" style="max-width: 25rem;">
         <table class="table table-hover">
             <thead>
                 <div class="card-header">
-                    Top 10 Hard Scores
+                    Top 10 Regular Hard Scores
                 </div>
                 <tr>
                     <th>Rank</th>
@@ -61,8 +70,12 @@
                 </tr>
             </thead>
             ${hard.map((hardscore,ind) => 
-                `<tr>
-                    <td>${ind+1}</td>
+                `${ind == 0 ? 
+                    `<tr class="text-white" style='background-color:#e74c3c;'>`
+                    : ind == 1 ? `<tr class="text-white" style='background-color:#b62616;'>`
+                    : ind == 2 ? `<tr class="text-white" style='background-color: #881d11;'>`
+                    : ``}
+                    <td class='scoreRank'>${ind+1}</td>
                     <td>${hardscore.f_name}</td>
                     <td>${hardscore.points}</td>
                     <td>${hardscore.accuracy}</td>

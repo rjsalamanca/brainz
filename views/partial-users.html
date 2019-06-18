@@ -1,76 +1,19 @@
-<h3>${welcome}</h3>
+<style>
+    #mainContentContainer{
+        max-width:1000px;
+        margin: 0 auto;
+    }
+</style>
+
+<h4>${welcome}</h4>
+
+<h1 class="scoresHeader display-6">Your Scores:</h1>
 
 <section class="section user-scores">
-    <div class="card score-info border-secondary mb-3" style="max-width: 20rem;">
+    <div class="card score-info border-danger border-secondary mb-3" style="max-width: 20rem;">
         <table class="table table-hover">
             <thead>
-                <div class="card-header">
-                    Top 10 Easy Scores
-                </div>
-                <tr>
-                    <th>Rank</th>
-                    <th>Points</th>
-                    <th>Accuracy</th>
-                </tr>
-            </thead>
-            ${easy.map((easyscore,ind) => 
-                `<tr>
-                    <td>${ind+1}</td>
-                    <td>${easyscore.points}</td>
-                    <td>${easyscore.accuracy}</td>
-                </tr>`
-            ).join('')}
-        </table>
-    </div>
-
-    <div class="card score-info border-secondary mb-3" style="max-width: 20rem;">
-        <table class="table table-hover">
-            <thead>
-                <div class="card-header">
-                    Top 10 Medium Scores
-                </div>
-                <tr>
-                    <th>Rank</th>
-                    <th>Points</th>
-                    <th>Accuracy</th>
-                </tr>
-            </thead>
-            ${med.map((medscore,ind) => 
-                `<tr>
-                    <td>${ind+1}</td>
-                    <td>${medscore.points}</td>
-                    <td>${medscore.accuracy}</td>
-                </tr>`
-            ).join('')}
-        </table>
-    </div>
-
-    <div class="card score-info border-secondary mb-3" style="max-width: 20rem;">
-        <table class="table table-hover">
-            <thead>
-                <div class="card-header">
-                    Top 10 Hard Scores
-                </div>
-                <tr>
-                    <th>Rank</th>
-                    <th>Points</th>
-                    <th>Accuracy</th>
-                </tr>
-            </thead>
-            ${hard.map((hardscore,ind) => 
-                `<tr>
-                    <td>${ind+1}</td>
-                    <td>${hardscore.points}</td>
-                    <td>${hardscore.accuracy}</td>
-                </tr>`
-            ).join('')}
-        </table>
-    </div>
-
-    <div class="card score-info border-secondary mb-3" style="max-width: 20rem;">
-        <table class="table table-hover">
-            <thead>
-                <div class="card-header">
+                <div class="card-header bg-danger text-white">
                     Most Recent Scores
                 </div>
                 <tr>
@@ -83,7 +26,7 @@
                 `<tr>
                     <td>${ind+1}</td>
                     <td>${recentscore.points}</td>
-                    <td>${recentscore.accuracy}</td>
+                    <td>${recentscore.accuracy}%</td>
                 </tr>`
             ).join('')}
         </table>
@@ -102,14 +45,87 @@
                 </tr>
             </thead>
             ${average.map((averagescore) =>
+                `
+                ${averagescore.id <= 3 ? 
+                    `
+                    <tr>
+                        <td>${averagescore.difficulty}</td>
+                        <td>${parseFloat(averagescore.avg_points).toFixed(2)}</td>
+                        <td>${parseFloat(averagescore.avg_accuracy).toFixed(2)}%</td>
+                    </tr>
+                    `:``
+                }
+                `
+            ).join('')}
+        </table>
+    </div>
+</section>
+
+<section class="section user-scores">
+    <div class="card score-info border-secondary mb-3" style="max-width: 20rem;">
+        <table class="table table-hover">
+            <thead>
+                <div class="card-header">
+                    Top 10 Regular Easy Scores
+                </div>
+                <tr>
+                    <th>Rank</th>
+                    <th>Points</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            ${easy.map((easyscore,ind) => 
                 `<tr>
-                    <td>${averagescore.difficulty}</td>
-                    <td>${parseFloat(averagescore.avg_points).toFixed(2)}</td>
-                    <td>${parseFloat(averagescore.avg_accuracy).toFixed(2)}</td>
+                    <td>${ind+1}</td>
+                    <td>${easyscore.points}</td>
+                    <td>${easyscore.accuracy}%</td>
                 </tr>`
             ).join('')}
         </table>
     </div>
 
+    <div class="card score-info border-secondary mb-3" style="max-width: 20rem;">
+        <table class="table table-hover">
+            <thead>
+                <div class="card-header">
+                    Top 10 Regular Medium Scores
+                </div>
+                <tr>
+                    <th>Rank</th>
+                    <th>Points</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            ${med.map((medscore,ind) => 
+                `<tr>
+                    <td>${ind+1}</td>
+                    <td>${medscore.points}</td>
+                    <td>${medscore.accuracy}%</td>
+                </tr>`
+            ).join('')}
+        </table>
+    </div>
+
+    <div class="card score-info border-secondary mb-3" style="max-width: 20rem;">
+        <table class="table table-hover">
+            <thead>
+                <div class="card-header">
+                    Top 10 Regular Hard Scores
+                </div>
+                <tr>
+                    <th>Rank</th>
+                    <th>Points</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            ${hard.map((hardscore,ind) => 
+                `<tr>
+                    <td>${ind+1}</td>
+                    <td>${hardscore.points}</td>
+                    <td>${hardscore.accuracy}%</td>
+                </tr>`
+            ).join('')}
+        </table>
+    </div>
 </section>
 

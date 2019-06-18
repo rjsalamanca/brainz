@@ -205,12 +205,22 @@ input[type="radio"][value="apocalypse"], input[type="radio"][value="apocalypse"]
   display:flex;
   justify-content:space-evenly;
   flex-wrap:wrap;
-  margin-top:5rem;
+}
+
+.scoresHeader{
+  margin: 20px 0 10px;
+  text-align:center;
+  text-shadow: 0 4px 0 rgba(100,100,100,1), 0 8px 3px rgba(0,0,0,0.7);
 }
 
 .score-info {
   flex-grow:1;
   margin:1%;
+}
+
+.scoreRank {
+  font-size: 1.2em;
+  font-weight:1000;
 }
 
 .card-header {
@@ -263,8 +273,6 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
 .video{
   display: flex;
 }
-
-
 
 .homePage{
   width: 15rem;
@@ -352,7 +360,6 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   
   }
 
-
   .instructions img:hover{
     /* background-color: rgba(233, 153, 4, 0.753); */
     transition: width 0.5s;
@@ -391,6 +398,5 @@ a:hover, button:hover, .close:hover, .btn:hover, .navbar-toggler:hover {
   .start img{
     width: 10rem;
     margin-top: 17rem;
-
   }
 } 
