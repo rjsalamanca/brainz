@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
                   `Hey ${req.session.user.f_name} don't forget to double tap`,
                   `${req.session.user.f_name} is training to be the next star of Zombieland`,
                   `World War Z's got nothing on ${req.session.user.f_name}`,
-                  `Fear the Walking Dead? ${req.session.user.f_name} definately does not.`,
+                  `Fear the Walking Dead? ${req.session.user.f_name} definitely does not.`,
                   `If ${req.session.user.f_name} was on the walking dead, there wouldn't be any zombies left.`,
                   `What has the Zombiepocalypse got on ${req.session.user.f_name}?`,
                   `Hey ${req.session.user.f_name}, how would you kill a zombie with toilet paper?`];
