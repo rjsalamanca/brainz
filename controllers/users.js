@@ -1,8 +1,11 @@
-const scoresModel = require('../models/scores');
+const Users = require('../models/users'),
+  scoresModel = require('../models/scores'),
+  bcrypt = require('bcryptjs'),
+  SALT_ROUNDS = 10;
 
-///////////
-// POSTS //
-///////////
+//////////
+// GETS //
+//////////
 
 exports.users_get =  async (req,res) => {
     const easyRegScores = await scoresModel.getUserScores(1, req.session.user.id),
@@ -75,7 +78,95 @@ exports.logout_get = (req,res) => {
     res.redirect('/');
 }
 
-//////////
-// GETS //
-//////////
+///////////
+// POSTS //
+///////////
 
+exports.add_user_post = async (req,res) => {
+  const { f_name, l_name, email, password } = req.body;
+
+  try{
+    // If we get an error we go to the catch
+    // If we don't get an error that means the user already exists
+    // We will print an error and tells the user that they already
+    // have an account.
+    await Users.searchUser(email);
+
+    res.render('template', { 
+      locals:{
+        isLoggedIn: req.session.loggedIn,
+        title: 'Register',
+        passwordCheck: false,
+        createdUserAlready: true,
+        newUser: false,
+        noUser: false
+      },
+      partials: {
+        partial:'partial-add-user'
+      }
+    });
+  } catch(err) {
+    try{ 
+      // Hashes password then adds to the user to the database.
+      const hashPassword = await bcrypt.hash(password,SALT_ROUNDS);
+      await Users.addUser(f_name, l_name, email, hashPassword);
+
+      // Once we add the password we want the id and add kills to the
+      // new kills table/
+      const newUser = await Users.searchUser(email);
+      await Kills.createKills(newUser.id);
+
+      req.session.newUser = true
+      res.redirect('/users/login')
+    } catch(err) {
+      return err.message;
+    }
+  }
+}
+
+exports.login_post = async (req,res) => {
+  const { email, password } = req.body;
+
+  try{
+    const currentUser = await Users.searchUser(email);
+    const comparePassword = await bcrypt.compare(password,currentUser.password);
+
+    if(!!comparePassword){
+      req.session.loggedIn = true;
+      req.session.user = { id: currentUser.id, email: currentUser.email, f_name: currentUser.f_name };
+      res.redirect('/users');
+    } else {
+      res.render('template', { 
+        locals:{
+          isLoggedIn: req.session.loggedIn,
+          title: 'Login',
+          passwordCheck: true,
+          createdUserAlready: false,
+          newUser: false,
+          noUser: false
+        },
+        partials: {
+          partial:'partial-login'
+        }
+      });
+      console.log('Wrong password')
+    }
+  } catch (err) {
+    console.log(err.message)
+    res.render('template', { 
+      locals:{
+        isLoggedIn: req.session.loggedIn,
+        title: 'Login',
+        createdUserAlready: false,
+        newUser: false,
+        passwordCheck: false,
+        noUser: true
+      },
+      partials: {
+        partial:'partial-login'
+      }
+    });
+
+    console.log('User not found in database.')    
+  }
+}

@@ -12,7 +12,7 @@ class Users{
     static async searchUser(email){
         try {
             const response = db.one(`
-                SELECT id, f_name 
+                SELECT id, password, email, f_name 
                 FROM users 
                 WHERE email = $1
             `, [email]);
