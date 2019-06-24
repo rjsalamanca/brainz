@@ -1,5 +1,5 @@
-const Games = require('../models/games');
-const Kills = require('../models/killCount');
+const Games = require('../models/games'),
+    Kills = require('../models/killCount');
 
 // GETS
 exports.games_get = (req,res) => {
