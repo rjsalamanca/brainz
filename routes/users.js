@@ -22,53 +22,42 @@ router.post('/add-user', async (req,res) => {
   const userInstance = new Users(null, f_name, l_name, email, password);
 
   try{
-    const search = await userInstance.searchUser();
-    console.log(search)
+    // If we get an error we go to the catch
+    // If we don't get an error that means the user already exists
+    // We will print an error and tells the user that they already
+    // have an account.
+    await userInstance.searchUser();
+
+    res.render('template', { 
+      locals:{
+        isLoggedIn: req.session.loggedIn,
+        title: 'Register',
+        passwordCheck: false,
+        createdUserAlready: true,
+        newUser: false,
+        noUser: false
+      },
+      partials: {
+        partial:'partial-add-user'
+      }
+    });
   } catch(err) {
     console.log('not found lets create a new one')
-  }
-  // let email = req.body.email;
-  // let password = req.body.password;
-  // let f_name = req.body.f_name;
-  // let l_name = req.body.l_name;
-  //let userInstance = new Users(null, email,)
-
-
-
-  db.oneOrNone('SELECT id, f_name FROM users WHERE email = $1', [email])
-  .then((user)=> {
-    if (user){
-      res.render('template', { 
-        locals:{
-          isLoggedIn: req.session.loggedIn,
-          title: 'Register',
-          passwordCheck: false,
-          createdUserAlready: true,
-          newUser: false,
-          noUser: false
-        },
-        partials: {
-          partial:'partial-add-user'
-        }
+    bcrypt.hash(password,SALT_ROUNDS,function(error, hash){
+      if(error == null){
+        db.none('INSERT INTO users(email, password, f_name, l_name) VALUES($1,$2,$3,$4)',[email,hash,f_name,l_name])
+        .then(() => {
+          console.log('SUCCESS')
+          db.one('SELECT id FROM users WHERE email = $1', [email]).then(async (response) => {
+            console.log('creating kills')
+            await Kills.createKills(response.id);
+          });
+          req.session.newUser = true
+          res.redirect('/users/login')
       });
-    } else {
-
-      bcrypt.hash(password,SALT_ROUNDS,function(error, hash){
-        if(error == null){
-          db.none('INSERT INTO users(email, password, f_name, l_name) VALUES($1,$2,$3,$4)',[email,hash,f_name,l_name])
-          .then(() => {
-            console.log('SUCCESS')
-            db.one('SELECT id FROM users WHERE email = $1', [email]).then(async (response) => {
-              console.log('creating kills')
-              await Kills.createKills(response.id);
-            });
-            req.session.newUser = true
-            res.redirect('/users/login')
-        });
-        }
-      })
-    };
-  });
+      }
+    })
+  }
 });
 
 
