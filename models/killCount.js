@@ -19,14 +19,12 @@ class Kills{
 
     static async createKills(id){
         try{
-            const response = await db.one(
+            await db.none(
                 `INSERT INTO kills
                     (kill_count,user_id)
                 VALUES
                     (0, $1)
-                `, [id]
-            );
-            return response;
+                `, [id]);
         } catch (err) {
             return err.message;
         }

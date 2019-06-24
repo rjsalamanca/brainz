@@ -19,14 +19,13 @@ router.get('/logout', usersController.logout_get);
 
 router.post('/add-user', async (req,res) => {
   const { f_name, l_name, email, password } = req.body;
-  const userInstance = new Users(null, f_name, l_name, email, password);
 
   try{
     // If we get an error we go to the catch
     // If we don't get an error that means the user already exists
     // We will print an error and tells the user that they already
     // have an account.
-    await userInstance.searchUser();
+    await Users.searchUser(email);
 
     res.render('template', { 
       locals:{
@@ -42,21 +41,22 @@ router.post('/add-user', async (req,res) => {
       }
     });
   } catch(err) {
-    console.log('not found lets create a new one')
-    bcrypt.hash(password,SALT_ROUNDS,function(error, hash){
-      if(error == null){
-        db.none('INSERT INTO users(email, password, f_name, l_name) VALUES($1,$2,$3,$4)',[email,hash,f_name,l_name])
-        .then(() => {
-          console.log('SUCCESS')
-          db.one('SELECT id FROM users WHERE email = $1', [email]).then(async (response) => {
-            console.log('creating kills')
-            await Kills.createKills(response.id);
-          });
-          req.session.newUser = true
-          res.redirect('/users/login')
-      });
-      }
-    })
+    try{ 
+
+      // Hashes password then adds to the user to the database.
+      const hashPassword = await bcrypt.hash(password,SALT_ROUNDS);
+      await Users.addUser(f_name, l_name, email, hashPassword);
+
+      // Once we add the password we want the id and add kills to the
+      // new kills table/
+      const newUser = await Users.searchUser(email);
+      await Kills.createKills(newUser.id);
+
+      req.session.newUser = true
+      res.redirect('/users/login')
+    } catch(err) {
+      return err.message;
+    }
   }
 });
 
