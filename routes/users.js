@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
 const Kills = require('../models/killCount');
+const Users = require('../models/users');
 
 const usersController = require('../controllers/users');
 
@@ -14,19 +15,25 @@ router.use(bodyParser.urlencoded({extended: false}));
 router.get('/', usersController.users_get);
 router.get('/add-user', usersController.add_user_get);
 router.get('/login', usersController.login_get);
+router.get('/logout', usersController.logout_get);
 
-router.get('/logout', (req,res) =>{
-  console.log('logging out');
-  req.session.destroy();
-  res.redirect('/');
-});
+router.post('/add-user', async (req,res) => {
+  const { f_name, l_name, email, password } = req.body;
+  const userInstance = new Users(null, f_name, l_name, email, password);
 
-router.post('/add-user', (req,res) =>{
-  let email = req.body.email;
-  let password = req.body.password;
-  let f_name = req.body.f_name;
-  let l_name = req.body.l_name;
+  try{
+    const search = await userInstance.searchUser();
+    console.log(search)
+  } catch(err) {
+    console.log('not found lets create a new one')
+  }
+  // let email = req.body.email;
+  // let password = req.body.password;
+  // let f_name = req.body.f_name;
+  // let l_name = req.body.l_name;
   //let userInstance = new Users(null, email,)
+
+
 
   db.oneOrNone('SELECT id, f_name FROM users WHERE email = $1', [email])
   .then((user)=> {
@@ -60,16 +67,8 @@ router.post('/add-user', (req,res) =>{
         });
         }
       })
-      // res.redirect('/users/login');
     };
   });
-
-  console.log(f_name);
-  console.log(l_name);
-  console.log(email);
-  console.log(password);
-
-  
 });
 
 
@@ -124,7 +123,6 @@ router.post('/login', (req,res) =>{
       console.log('wrong')
     }
   });
-
 });
 
 module.exports = router;

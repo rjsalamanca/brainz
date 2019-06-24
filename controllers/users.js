@@ -1,5 +1,9 @@
 const scoresModel = require('../models/scores');
 
+///////////
+// POSTS //
+///////////
+
 exports.users_get =  async (req,res) => {
     const easyRegScores = await scoresModel.getUserScores(1, req.session.user.id),
         medRegScores = await scoresModel.getUserScores(2, req.session.user.id),
@@ -65,3 +69,13 @@ exports.login_get = (req,res) => {
         }
     });
 }
+
+exports.logout_get = (req,res) => {
+    req.session.destroy();
+    res.redirect('/');
+}
+
+//////////
+// GETS //
+//////////
+
