@@ -35,3 +35,33 @@ exports.users_get =  async (req,res) => {
         }
     });
 }
+
+exports.add_user_get = async (req,res) => {
+    res.render('template', { 
+        locals:{
+            isLoggedIn: req.session.loggedIn,
+            title: 'Register',
+            emailCheck: false,
+            createdUserAlready: false
+        },
+        partials: {
+            partial:'partial-add-user'
+        }
+    });
+}
+
+exports.login_get = (req,res) => {
+    res.render('template', { 
+        locals:{
+            isLoggedIn: req.session.loggedIn,
+            title: 'Login',
+            passwordCheck: false,
+            createdUserAlready: false,
+            newUser: req.session.newUser,
+            noUser: false
+        },
+        partials: {
+            partial:'partial-login'
+        }
+    });
+}

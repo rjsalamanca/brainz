@@ -6,49 +6,14 @@ const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 10;
 const Kills = require('../models/killCount');
 
-const scoresController = require('../controllers/users');
+const usersController = require('../controllers/users');
 
 router.use(bodyParser.urlencoded({extended: false}));
 
 /* GET users listing. */
-router.get('/', scoresController.users_get);
-
-router.get('/add-user', (req,res) => {
-  // res.render('partial-add-user');
-  console.log(req.session.user)
-
-  res.render('template', { 
-    locals:{
-      isLoggedIn: req.session.loggedIn,
-      title: 'Register',
-      emailCheck: false,
-      createdUserAlready: false
-    },
-    partials: {
-      partial:'partial-add-user'
-    }
-  });
-
-});
-
-
-router.get('/login', (req,res) => {
-  // res.render('partial-add-user');
-  res.render('template', { 
-    locals:{
-      isLoggedIn: req.session.loggedIn,
-      title: 'Login',
-      passwordCheck: false,
-      createdUserAlready: false,
-      newUser: req.session.newUser,
-      noUser: false
-    },
-    partials: {
-      partial:'partial-login'
-    }
-  });
-
-});
+router.get('/', usersController.users_get);
+router.get('/add-user', usersController.add_user_get);
+router.get('/login', usersController.login_get);
 
 router.get('/logout', (req,res) =>{
   console.log('logging out');
