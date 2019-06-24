@@ -8,6 +8,7 @@ const Users = require('../models/users'),
 //////////
 
 exports.users_get =  async (req,res) => {
+  if(!!req.session.loggedIn){
     const easyRegScores = await scoresModel.getUserScores(1, req.session.user.id),
         medRegScores = await scoresModel.getUserScores(2, req.session.user.id),
         hardRegScores = await scoresModel.getUserScores(3, req.session.user.id),
@@ -41,6 +42,9 @@ exports.users_get =  async (req,res) => {
             partial:'partial-users'
         }
     });
+  } else {
+    res.redirect('/users/login');
+  }
 }
 
 exports.add_user_get = async (req,res) => {
